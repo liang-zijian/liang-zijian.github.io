@@ -18,23 +18,23 @@
   <meta name="author" content="勤奋的草莓道士">
   <meta name="keywords" content="">
   
-    <meta name="description" content="电赛集训记录">
+    <meta name="description" content="ROS操作系统学习记录">
 <meta property="og:type" content="article">
-<meta property="og:title" content="电赛2022&#x2F;10&#x2F;13十天集训">
-<meta property="og:url" content="https://liang-zijian.github.io/2022/10/13/jixun/index.html">
+<meta property="og:title" content="ROS学习">
+<meta property="og:url" content="https://liang-zijian.github.io/2022/10/14/ROS/index.html">
 <meta property="og:site_name" content="SpaceShip to Ultimate">
-<meta property="og:description" content="电赛集训记录">
+<meta property="og:description" content="ROS操作系统学习记录">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://liang-zijian.github.io/img/TI.png">
-<meta property="article:published_time" content="2022-10-13T10:24:39.887Z">
-<meta property="article:modified_time" content="2022-10-13T10:27:36.306Z">
+<meta property="og:image" content="https://liang-zijian.github.io/img/ROS.jpg">
+<meta property="article:published_time" content="2022-10-14T03:09:15.810Z">
+<meta property="article:modified_time" content="2022-10-14T03:12:20.070Z">
 <meta property="article:author" content="勤奋的草莓道士">
-<meta property="article:tag" content="Competition">
+<meta property="article:tag" content="ROS">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://liang-zijian.github.io/img/TI.png">
+<meta name="twitter:image" content="https://liang-zijian.github.io/img/ROS.jpg">
   
   
-  <title>电赛2022/10/13十天集训 - SpaceShip to Ultimate</title>
+  <title>ROS学习 - SpaceShip to Ultimate</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -206,7 +206,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="电赛2022/10/13十天集训"></span>
+            <span id="subtitle" data-typed-text="ROS学习"></span>
           
         </div>
 
@@ -217,8 +217,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-10-13 18:24" pubdate>
-          2022年10月13日 晚上
+        <time datetime="2022-10-14 11:09" pubdate>
+          2022年10月14日 上午
         </time>
       </span>
     
@@ -229,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          117 字
+          1.9k 字
         
       </span>
     
@@ -240,7 +240,7 @@
         
         
         
-          1 分钟
+          16 分钟
         
       </span>
     
@@ -280,14 +280,55 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">电赛2022/10/13十天集训</h1>
+            <h1 style="display: none">ROS学习</h1>
             
             <div class="markdown-body">
               
-              <h1 id="十天集训"><a href="#十天集训" class="headerlink" title="十天集训"></a>十天集训</h1><h2 id="定位算法"><a href="#定位算法" class="headerlink" title="定位算法"></a>定位算法</h2><h3 id="透视变换"><a href="#透视变换" class="headerlink" title="透视变换"></a>透视变换</h3><p>变换矩阵 校准</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43568457/article/details/108549331">(19条消息) 智能车图像处理之透视变换_小陈敲代码的博客-CSDN博客</a></p>
-<h2 id="入库运动控制"><a href="#入库运动控制" class="headerlink" title="入库运动控制"></a>入库运动控制</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zghforever/article/details/86742833?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2~default~CTRLIST~Rate-1-86742833-blog-122146381.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2~default~CTRLIST~Rate-1-86742833-blog-122146381.pc_relevant_default&utm_relevant_index=1">(19条消息) 自动泊车轨迹规划场景介绍_henry.zhu51的博客-CSDN博客_自动泊车路径规划</a></p>
-<h2 id="出库"><a href="#出库" class="headerlink" title="出库"></a>出库</h2><p>逆运动学出库</p>
+              <p>📹<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ci4y1L7ZZ?p=2&vd_source=42adc2c6a838abdcd052df0c7764efad">002ROS诞生背景_Chapter1-ROS概述与环境搭建_哔哩哔哩_bilibili</a></p>
+<h2 id="Chapter-1"><a href="#Chapter-1" class="headerlink" title="Chapter 1"></a>Chapter 1</h2><blockquote>
+<p>ROS概念：<br>    ROS：开源、元操作系统、分布式架构<br>    <code>ROS = Plumping + Tools + Capabilities + Ecosystem</code><br>    通讯机制+工具包+机器人高层技能+机器人生态系统</p>
+</blockquote>
+<h3 id="HelloWorld"><a href="#HelloWorld" class="headerlink" title="HelloWorld"></a>HelloWorld</h3><p>实现流程：</p>
+<ul>
+<li>创建workspace</li>
+<li>创建功能包</li>
+<li>编辑源文件(.c .cpp .py …)</li>
+<li>编辑配置文件</li>
+<li>编译并执行</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p 自定义空间名称/src<br><span class="hljs-built_in">cd</span> 自定义空间名称<br>catkin_make<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> src<br>catkin_create_pkg 自定义ROS包名 roscpp rospy std_msgs<br></code></pre></td></tr></table></figure>
+<p>该功能包依赖于 roscpp、rospy 与 std_msgs，其中roscpp是使用C++实现的库，而rospy则是使用python实现的库，std_msgs是标准消息库</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">//编辑souce file</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;ros/ros.h&quot;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[])</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//执行 ros 节点初始化</span><br>    ros::<span class="hljs-built_in">init</span>(argc,argv,<span class="hljs-string">&quot;hello&quot;</span>);<br>    <span class="hljs-comment">//创建 ros 节点句柄(非必须)</span><br>    ros::NodeHandle n;<br>    <span class="hljs-comment">//控制台输出 hello world</span><br>    <span class="hljs-built_in">ROS_INFO</span>(<span class="hljs-string">&quot;hello world!&quot;</span>);<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs CMake"><span class="hljs-comment">#编辑CMakelist.txt文件</span><br><span class="hljs-keyword">add_executable</span>(步骤<span class="hljs-number">3</span>的源文件名<br>  src/步骤<span class="hljs-number">3</span>的源文件名.cpp<br>)<br><span class="hljs-keyword">target_link_libraries</span>(步骤<span class="hljs-number">3</span>的源文件名<br>  <span class="hljs-variable">$&#123;catkin_LIBRARIES&#125;</span><br>)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> 自定义空间名称<br>catkin_make<br></code></pre></td></tr></table></figure>
+<p>编译生成 <code>build</code> 和 <code>devel</code></p>
+<p>执行：</p>
+<ul>
+<li><p>命令行1：<br>  roscore</p>
+<p>  terminator命令行多开：<br>  <em>Ctrl+Shift+O</em><br>      Split terminals Horizontally.（上下开新窗口）<br>  <em>Ctrl+Shift+E</em><br>      Split terminals Vertically.（垂直开新窗口）</p>
+</li>
+<li><p>命令行2：</p>
+<blockquote>
+<p>cd 工作空间<br>source .&#x2F;devel&#x2F;setup.bash<br>rosrun 包名 节点</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="VSCode开发配置"><a href="#VSCode开发配置" class="headerlink" title="VSCode开发配置"></a>VSCode开发配置</h3><p>创建WS：</p>
+<blockquote>
+<p>mkdir -p xxx_ws&#x2F;src(必须得有 src)<br>  cd xxx_ws<br>  catkin_make</p>
+</blockquote>
+<p>启动vscode:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> xxx_ws<br>code .<br></code></pre></td></tr></table></figure>
+
+
+<p>设置编译<br>快捷键ctrl + shift + B调用编译，选择catkin_make:build<br>修改.vscode&#x2F;tasks.json</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br><span class="hljs-comment">// 有关 tasks.json 格式的文档，请参见</span><br>    <span class="hljs-comment">// https://go.microsoft.com/fwlink/?LinkId=733558</span><br>    <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2.0.0&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;tasks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>        <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;catkin_make:debug&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//代表提示的描述性信息</span><br>            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;shell&quot;</span><span class="hljs-punctuation">,</span>  <span class="hljs-comment">//可以选择shell或者process,如果是shell代码是在shell里面运行一个命令，如果是process代表作为一个进程来运行</span><br>            <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;catkin_make&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//这个是我们需要运行的命令</span><br>            <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//如果需要在命令后面加一些后缀，可以写在这里，比如-DCATKIN_WHITELIST_PACKAGES=“pac1;pac2”</span><br>            <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;build&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;isDefault&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-keyword">true</span><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;presentation&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>                <span class="hljs-attr">&quot;reveal&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;always&quot;</span><span class="hljs-comment">//可选always或者silence，代表是否输出信息</span><br>            <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;problemMatcher&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$msCompile&quot;</span><br>        <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br><br></code></pre></td></tr></table></figure>
+
+<p>创建 ROS 功能包<br>选定 src 右击 —&gt; create catkin package</p>
 
               
             </div>
@@ -299,7 +340,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Competition/">#Competition</a>
+        <a href="/tags/ROS/">#ROS</a>
       
     </div>
   
@@ -311,8 +352,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>电赛2022/10/13十天集训</div>
-      <div>https://liang-zijian.github.io/2022/10/13/jixun/</div>
+      <div>ROS学习</div>
+      <div>https://liang-zijian.github.io/2022/10/14/ROS/</div>
     </div>
     <div class="license-meta">
       
@@ -324,7 +365,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年10月13日</div>
+          <div>2022年10月14日</div>
         </div>
       
       
@@ -354,18 +395,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/10/14/ROS/" title="ROS学习">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ROS学习</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/10/11/cat%20peace/" title="快乐之道">
-                        <span class="hidden-mobile">快乐之道</span>
+                      <a href="/2022/10/13/jixun/" title="电赛2022/10/13十天集训">
+                        <span class="hidden-mobile">电赛2022/10/13十天集训</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
