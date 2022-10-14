@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://liang-zijian.github.io/img/ROS.jpg">
 <meta property="article:published_time" content="2022-10-14T03:09:15.810Z">
-<meta property="article:modified_time" content="2022-10-14T03:34:34.500Z">
+<meta property="article:modified_time" content="2022-10-14T13:48:55.586Z">
 <meta property="article:author" content="勤奋的草莓道士">
 <meta property="article:tag" content="ROS">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          2.4k 字
         
       </span>
     
@@ -240,7 +240,7 @@
         
         
         
-          16 分钟
+          21 分钟
         
       </span>
     
@@ -331,7 +331,23 @@
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br><span class="hljs-comment">// 有关 tasks.json 格式的文档，请参见</span><br>    <span class="hljs-comment">// https://go.microsoft.com/fwlink/?LinkId=733558</span><br>    <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2.0.0&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;tasks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>        <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;catkin_make:debug&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//代表提示的描述性信息</span><br>            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;shell&quot;</span><span class="hljs-punctuation">,</span>  <span class="hljs-comment">//可以选择shell或者process,如果是shell代码是在shell里面运行一个命令，如果是process代表作为一个进程来运行</span><br>            <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;catkin_make&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//这个是我们需要运行的命令</span><br>            <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><span class="hljs-comment">//如果需要在命令后面加一些后缀，可以写在这里，比如-DCATKIN_WHITELIST_PACKAGES=“pac1;pac2”</span><br>            <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;build&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;isDefault&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-keyword">true</span><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;presentation&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>                <span class="hljs-attr">&quot;reveal&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;always&quot;</span><span class="hljs-comment">//可选always或者silence，代表是否输出信息</span><br>            <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;problemMatcher&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$msCompile&quot;</span><br>        <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br><br></code></pre></td></tr></table></figure>
 
 <p>创建 ROS 功能包<br>选定 src 右击 —&gt; create catkin package</p>
-
+<h3 id="Launch文件"><a href="#Launch文件" class="headerlink" title="Launch文件"></a>Launch文件</h3><blockquote>
+<p>一次性启动多个ROS节点</p>
+</blockquote>
+<p>实现：</p>
+<ol>
+<li>功能包右击–&gt;添加launch文件夹</li>
+<li>再launch folder中添加launch文件</li>
+<li>编辑launch文件内容<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">launch</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;helloworld&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;demo_hello&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;hello&quot;</span> <span class="hljs-attr">output</span>=<span class="hljs-string">&quot;screen&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;turtlesim&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtlesim_node&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;t1&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">node</span> <span class="hljs-attr">pkg</span>=<span class="hljs-string">&quot;turtlesim&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;turtle_teleop_key&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;key1&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">launch</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>node —&gt; 包含的某个节点</li>
+<li>pkg —–&gt; 功能包</li>
+<li>type —-&gt; 被运行的节点文件</li>
+<li>name –&gt; 为节点命名</li>
+<li><strong>output-&gt; 设置日志的输出目标</strong><br>运行launch文件<br><code>roslaunch 包名 launch文件名</code></li>
+</ul>
+<h3 id="ROS架构"><a href="#ROS架构" class="headerlink" title="ROS架构"></a>ROS架构</h3>
               
             </div>
             <hr/>
