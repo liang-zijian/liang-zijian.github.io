@@ -20,20 +20,20 @@
   
     <meta name="description" content="时间相机项目前期准备">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test">
+<meta property="og:title" content="事件相机文献阅读记录">
 <meta property="og:url" content="https://liang-zijian.github.io/2022/10/17/%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87/index.html">
 <meta property="og:site_name" content="SpaceShip to Ultimate">
 <meta property="og:description" content="时间相机项目前期准备">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://liang-zijian.github.io/img/mona.jpg">
+<meta property="og:image" content="https://liang-zijian.github.io/img/eventcam.jpg">
 <meta property="article:published_time" content="2022-10-17T01:20:05.673Z">
-<meta property="article:modified_time" content="2022-10-17T02:13:03.540Z">
+<meta property="article:modified_time" content="2022-10-17T03:01:04.099Z">
 <meta property="article:author" content="勤奋的草莓道士">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://liang-zijian.github.io/img/mona.jpg">
+<meta name="twitter:image" content="https://liang-zijian.github.io/img/eventcam.jpg">
   
   
-  <title>test - SpaceShip to Ultimate</title>
+  <title>事件相机文献阅读记录 - SpaceShip to Ultimate</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -205,7 +205,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="test"></span>
+            <span id="subtitle" data-typed-text="事件相机文献阅读记录"></span>
           
         </div>
 
@@ -279,7 +279,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">test</h1>
+            <h1 style="display: none">事件相机文献阅读记录</h1>
             
             <div class="markdown-body">
               
@@ -294,8 +294,23 @@
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/108509283">系列篇|一文尽览事件相机原理 - 知乎 (zhihu.com)</a> <img src="https://pic1.zhimg.com/v2-c1c878c7df14a950500b5c2173f1ce7c_b.webp" srcset="/img/loading.gif" lazyload /></p>
 <p><img src="https://s2.loli.net/2022/10/02/ZraCpG6SFmQdOgf.png" srcset="/img/loading.gif" lazyload /></p>
 <h2 id="event-based-visual-inertial-odometry">Event-based Visual Inertial Odometry</h2>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29797957/article/details/100545988">(18条消息) DAVIS第二课：基于事件相机的视觉里程计_爱发呆de白菜头的博客-CSDN博客</a> * 特征跟踪期间没有使用固定时间窗长(Such tracks are difficult to obtain among asynchronous events due to the lack of any intensity neighborhood.)而是使用两个EM步骤和可变时间帧 * 融合了惯性传感器，重构相机的姿态 * 仅在事件流中跟踪特定特征，高动态，快速，无需重建底层图像梯度 <img src="https://s2.loli.net/2022/10/02/JCOQ5mWuRgy6tL1.png" srcset="/img/loading.gif" lazyload /></p>
-<p>将小时空窗口的光流假设恒定，曲线变成了线，估计流量变成计算线的斜率 &gt; 根据每个projected landmark位置在图像中移动 <span class="math inline">\(k\)</span>个像素的时间动态更新时间窗口大小 <span class="math inline">\(dt\)</span> * <strong>Problem1</strong>: (<em>Event-based Visual Inertial Odometry</em>)Given inertial measurements <span class="math inline">\(\mathcal{I}\)</span> and event measurements <span class="math inline">\(\mathcal{E}\)</span>, estimate the sensor state <span class="math inline">\(s(t)\)</span> over time. * <strong>Problem 1a</strong> (<em>Event-based Feature Tracking</em>). Given event measurements <span class="math inline">\(\mathcal{E}\)</span>, the camera state <span class="math inline">\(s_i := s(T_i)\)</span> at time <span class="math inline">\(T_i\)</span> and a temporal window size <span class="math inline">\(dt_i\)</span>, estimate the feature projections <span class="math inline">\(F (t)\)</span> for t ∈ [T_i, T_{i+1}] in the image plane and the next temporal window size <span class="math inline">\(dt_{i+1}\)</span>. 给出事件数据，相机状态s和一个时间窗尺寸，估计在t时间段内的特征的预测位置，和下一时刻的时间窗位置 * <strong>Problem 1b</strong> (<em>Visual Inertial Odometry</em>). Given inertial measurements I at times {τk}, a camera state si at time Ti, a temporal window size dti, and feature tracks F (t) for t ∈ [Ti, Ti+1], estimate the camera state <span class="math inline">\(s_{i+1}\)</span> 给出IMU数据，相机状态和一个时间窗尺寸，以及在t时间段内的特征预测位置，估计下一时刻的相机状态</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29797957/article/details/100545988">(18条消息) DAVIS第二课：基于事件相机的视觉里程计_爱发呆de白菜头的博客-CSDN博客</a></p>
+<ul>
+<li><p>特征跟踪期间没有使用固定时间窗长(Such tracks are difficult to obtain among asynchronous events due to the lack of any intensity neighborhood.)而是使用两个EM步骤和可变时间帧</p></li>
+<li><p>融合了惯性传感器，重构相机的姿态</p></li>
+<li><p>仅在事件流中跟踪特定特征，高动态，快速，无需重建底层图像梯度 <img src="https://s2.loli.net/2022/10/02/JCOQ5mWuRgy6tL1.png" srcset="/img/loading.gif" lazyload /></p></li>
+</ul>
+<p>将小时空窗口的光流假设恒定，曲线变成了线，估计流量变成计算线的斜率</p>
+<blockquote>
+<p>根据每个projected landmark位置在图像中移动 <span class="math inline">\(k\)</span>个像素的时间动态更新时间窗口大小 <span class="math inline">\(dt\)</span></p>
+</blockquote>
+<ul>
+<li><strong>Problem1</strong>: (<em>Event-based Visual Inertial Odometry</em>)Given inertial measurements <span class="math inline">\(\mathcal{I}\)</span> and event measurements <span class="math inline">\(\mathcal{E}\)</span>, estimate the sensor state <span class="math inline">\(s(t)\)</span> over time.
+<ul>
+<li><p><strong>Problem 1a</strong> (<em>Event-based Feature Tracking</em>). Given event measurements <span class="math inline">\(\mathcal{E}\)</span>, the camera state <span class="math inline">\(s_i := s(T_i)\)</span> at time <span class="math inline">\(T_i\)</span> and a temporal window size <span class="math inline">\(dt_i\)</span>, estimate the feature projections <span class="math inline">\(F (t)\)</span> for t ∈ [Ti, Ti+1] in the image plane and the next temporal window size <span class="math inline">\(dt_{i+1}\)</span>. 给出事件数据，相机状态s和一个时间窗尺寸，估计在t时间段内的特征的预测位置，和下一时刻的时间窗位置</p></li>
+<li><p><strong>Problem 1b</strong> (<em>Visual Inertial Odometry</em>). Given inertial measurements I at times <span class="math inline">\(τ_k\)</span>, a camera state si at time <span class="math inline">\(T_i\)</span>, a temporal window size dti, and feature tracks F (t) for t ∈ [Ti, Ti+1], estimate the camera state <span class="math inline">\(s_{i+1}\)</span> 给出IMU数据，相机状态和一个时间窗尺寸，以及在t时间段内的特征预测位置，估计下一时刻的相机状态</p></li>
+</ul></li>
+</ul>
 <h2 id="event-based-feature-tracking事件跟踪">Event-based Feature Tracking事件跟踪</h2>
 <p><img src="https://s2.loli.net/2022/10/02/Kmy6rXBHgRlCYV1.png" srcset="/img/loading.gif" lazyload /> 特征跟踪</p>
 <h3 id="optical-flow-estimation">Optical Flow Estimation</h3>
@@ -327,7 +342,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>test</div>
+      <div>事件相机文献阅读记录</div>
       <div>https://liang-zijian.github.io/2022/10/17/前期准备/</div>
     </div>
     <div class="license-meta">
