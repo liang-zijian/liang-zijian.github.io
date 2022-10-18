@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://liang-zijian.github.io/img/eventcam.jpg">
 <meta property="article:published_time" content="2022-10-17T01:20:05.673Z">
-<meta property="article:modified_time" content="2022-10-18T01:05:50.284Z">
+<meta property="article:modified_time" content="2022-10-18T01:45:14.733Z">
 <meta property="article:author" content="勤奋的草莓道士">
 <meta property="article:tag" content="Research">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          2.1k 字
         
       </span>
     
@@ -240,7 +240,7 @@
         
         
         
-          17 分钟
+          18 分钟
         
       </span>
     
@@ -356,8 +356,8 @@ class="math inline">\(s_{i+1}\)</span>
 </ul>
 <h2 id="event-based-feature-tracking事件跟踪">Event-based Feature
 Tracking事件跟踪</h2>
-<p><img src="https://s2.loli.net/2022/10/02/Kmy6rXBHgRlCYV1.png" srcset="/img/loading.gif" lazyload />
-特征跟踪</p>
+<p>算法流程：</p>
+<p><img src="https://s2.loli.net/2022/10/02/Kmy6rXBHgRlCYV1.png" srcset="/img/loading.gif" lazyload /></p>
 <h3 id="optical-flow-estimation">Optical Flow Estimation</h3>
 <p>利用投影特征轨迹的连续性(continuity in the projected feature
 trajectories)找到<span class="math inline">\(x\)</span>和<span
@@ -367,6 +367,9 @@ src="https://s2.loli.net/2022/10/02/eYwRi92BOCGTEVq.png" srcset="/img/loading.gi
 <h3 id="template-alignment-and-ransac">Template Alignment and
 RANSAC</h3>
 <p>利用上述方法可以解决problem1，但是还要解决估计中的噪声问题</p>
+<div class="note note-success">
+            <p>将其估计为将<spanclass="math inline">\({\{l_k^i\}_{k=1}^{n_i}}\)</span>扭曲到<code>观察到该特征的第一个camera pose</code>中模板<spanclass="math inline">\({\{l_k^{i*}\}_{k=1}^{n_{i*}}}\)</span>的仿射扭曲</p>
+          </div>
 <h2 id="相机状态估计">相机状态估计</h2>
 <h2 id="普光相机在slam图中的定位">普光相机在SLAM图中的定位</h2>
 <h2 id="esim-simulator"><strong>ESIM simulator</strong></h2>
