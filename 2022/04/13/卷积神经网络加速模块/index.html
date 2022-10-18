@@ -289,27 +289,41 @@
 <p>.....</p>
 <h2 id="硬件加速基本方法">硬件加速基本方法</h2>
 <p>利用<strong>片内DSP资源</strong></p>
-<p><strong>优化方式：</strong> 1.减少输入参数 2.量化 3.并行计算 流水线设计</p>
+<p><strong>优化方式：</strong> 1.减少输入参数 2.量化 3.并行计算
+流水线设计</p>
 <h2 id="模型优化">模型优化</h2>
 <p>常用方法：剪枝、量化、知识蒸馏</p>
 <h3 id="剪枝">剪枝</h3>
-<p>剪枝过程： ①训练网络到收敛 ②设置阈值t，权重小于t的连接裁剪 ③剪枝后重新训练</p>
-<p><strong>pytorch 剪枝API</strong> https://github.com/mepeichun/Efficient-Neural-Network-Bilibili</p>
-<p>B站Efficient-Neural-Network学习分享的配套代码 [1] Pytorch入门：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av86131672">https://www.bilibili.com/video/av86131672</a></p>
-<p>[2] 神经网络剪枝：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av86253919">https://www.bilibili.com/video/av86253919</a></p>
-<p>[3] 神经网络量化：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av86754124">https://www.bilibili.com/video/av86754124</a></p>
-<p>[4] 知识蒸馏：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av87124082/">https://www.bilibili.com/video/av87124082/</a></p>
+<p>剪枝过程： ①训练网络到收敛 ②设置阈值t，权重小于t的连接裁剪
+③剪枝后重新训练</p>
+<p><strong>pytorch 剪枝API</strong>
+https://github.com/mepeichun/Efficient-Neural-Network-Bilibili</p>
+<p>B站Efficient-Neural-Network学习分享的配套代码 [1] Pytorch入门：<a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/av86131672">https://www.bilibili.com/video/av86131672</a></p>
+<p>[2] 神经网络剪枝：<a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/av86253919">https://www.bilibili.com/video/av86253919</a></p>
+<p>[3] 神经网络量化：<a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/av86754124">https://www.bilibili.com/video/av86754124</a></p>
+<p>[4] 知识蒸馏：<a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/av87124082/">https://www.bilibili.com/video/av87124082/</a></p>
 <h3 id="量化">量化</h3>
-<p>分类： 1、聚类量化 2、整形量化 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/79744430">Tensorflow模型量化(Quantization)原理及其实现方法 - 知乎 (zhihu.com)</a></p>
+<p>分类： 1、聚类量化 2、整形量化 <a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/79744430">Tensorflow模型量化(Quantization)原理及其实现方法
+- 知乎 (zhihu.com)</a></p>
 <h2 id="硬件优化">硬件优化</h2>
 <p><strong>局部感受野特性</strong></p>
 <figure>
-<img src="https://s2.loli.net/2022/04/13/QhgfijlFkIP4A7x.png" srcset="/img/loading.gif" lazyload alt="image-20220413200737926" /><figcaption aria-hidden="true">image-20220413200737926</figcaption>
+<img src="https://s2.loli.net/2022/04/13/QhgfijlFkIP4A7x.png" srcset="/img/loading.gif" lazyload
+alt="image-20220413200737926" />
+<figcaption aria-hidden="true">image-20220413200737926</figcaption>
 </figure>
-<p><strong>代码示例：</strong> http://github.com/bird1and1fish/Garbage-Sorting-Network-</p>
+<p><strong>代码示例：</strong>
+http://github.com/bird1and1fish/Garbage-Sorting-Network-</p>
 <p><strong>系统结构</strong>：</p>
 <figure>
-<img src="https://s2.loli.net/2022/04/13/Jkvr3PYe9GmC4Xc.png" srcset="/img/loading.gif" lazyload alt="系统结构" /><figcaption aria-hidden="true">系统结构</figcaption>
+<img src="https://s2.loli.net/2022/04/13/Jkvr3PYe9GmC4Xc.png" srcset="/img/loading.gif" lazyload
+alt="系统结构" />
+<figcaption aria-hidden="true">系统结构</figcaption>
 </figure>
 <p><img src="https://s2.loli.net/2022/04/13/bOPqeRakVNploC9.png" srcset="/img/loading.gif" lazyload /></p>
 <p><img src="https://s2.loli.net/2022/04/13/SPoFbwKu3jDdLt9.png" srcset="/img/loading.gif" lazyload /></p>
