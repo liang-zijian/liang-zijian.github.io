@@ -1,4 +1,282 @@
-<!doctype html>
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/spaceship.png">
+  <link rel="icon" href="/img/spaceship.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="勤奋的草莓道士">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="VitisAI(07) 自定义模型部署_Wei.Studio的博客-CSDN博客                                .MathJax_Display {text-align: center; margin: 1em 0em; position: r">
+<meta property="og:type" content="website">
+<meta property="og:title" content="page.title">
+<meta property="og:url" content="https://liang-zijian.github.io/downloads/code/07.html">
+<meta property="og:site_name" content="SpaceShip to Ultimate">
+<meta property="og:description" content="VitisAI(07) 自定义模型部署_Wei.Studio的博客-CSDN博客                                .MathJax_Display {text-align: center; margin: 1em 0em; position: r">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Foriginal.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewCurrentTime2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FarticleReadEyes2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FtobarCollect2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FtobarCollectionActive2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F9fe64ed389ce4cedbeb9969bd24399f4.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_224%2Cw_224&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fcomponents%2Fimg%2FstudyVipIcon.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FiconVIpCrown.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fcomponents%2Fimg%2FvipIconArrowLeftWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F97678deab38c4ce9b2fe4bf852ba2c9e.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F33369b5ebd0c41ed86332cecf1cb7500.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fprofile.csdnimg.cn%2F8%2FB%2FC%2F3_abcxy2161&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel1.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey1.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel3.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey3.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel4.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey4.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel5.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey5.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcloseBt.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcommentArrowLeftWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FiconPark.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcommentArrowDownWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcloseBt.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fprofile.csdnimg.cn%2F8%2FB%2FC%2F3_abcxy2161&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewUnChoose.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewChoose.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewUnChoose.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewChoose.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-time-out.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewWeiXin.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewZhiFuBao.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-time-out.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fweixin.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fzhifubao.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fjingdong.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-help.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="og:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Frecharge.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+<meta property="article:published_time" content="2022-10-25T14:15:33.705Z">
+<meta property="article:modified_time" content="2022-10-25T12:56:32.000Z">
+<meta property="article:author" content="勤奋的草莓道士">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Foriginal.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+  
+  
+  <title>page.title - SpaceShip to Ultimate</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"liang-zijian.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SpaceShip to Ultimate</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="page.title"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <!doctype html>
 <html lang="zh-CN">
  <head> 
   <meta charset="utf-8"> 
@@ -37,14 +315,14 @@
         </div> 
         <div class="article-info-box"> 
          <div class="article-bar-top"> 
-          <img class="article-type-img" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Foriginal.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
+          <img class="article-type-img" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Foriginal.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
           <div class="bar-content"> 
            <a class="follow-nickName " href="https://blog.csdn.net/abcxy2161" target="_blank" rel="noopener">Wei.Studio</a> 
-           <img class="article-time-img article-heard-img" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewCurrentTime2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
+           <img class="article-time-img article-heard-img" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewCurrentTime2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
            <span class="time">于&nbsp;2022-08-27 15:43:02&nbsp;发布</span> 
-           <img class="article-read-img article-heard-img" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FarticleReadEyes2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
+           <img class="article-read-img article-heard-img" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FarticleReadEyes2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
            <span class="read-count">462</span> 
-           <a id="blog_detail_zk_collection" class="un-collection" data-report-click="{&quot;mod&quot;:&quot;popu_823&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4232&quot;,&quot;ab&quot;:&quot;new&quot;}"> <img class="article-collect-img article-heard-img un-collect-status isdefault" style="display:inline-block" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FtobarCollect2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> <img class="article-collect-img article-heard-img collect-status isactive" style="display:none" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FtobarCollectionActive2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> <span class="name">收藏</span> <span class="get-collection"> 1 </span> </a> 
+           <a id="blog_detail_zk_collection" class="un-collection" data-report-click="{&quot;mod&quot;:&quot;popu_823&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4232&quot;,&quot;ab&quot;:&quot;new&quot;}"> <img class="article-collect-img article-heard-img un-collect-status isdefault" style="display:inline-block" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FtobarCollect2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> <img class="article-collect-img article-heard-img collect-status isactive" style="display:none" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FtobarCollectionActive2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> <span class="name">收藏</span> <span class="get-collection"> 1 </span> </a> 
           </div> 
          </div> 
          <div class="blog-tags-box"> 
@@ -80,7 +358,7 @@
        <div class="column-group"> 
         <div class="column-group-item column-group0 column-group-item-one"> 
          <div class="item-l"> 
-          <a class="item-target" href="https://blog.csdn.net/abcxy2161/category_11789491.html" target="_blank" title="Vitis AI" data-report-view="{&quot;spm&quot;:&quot;1001.2101.3001.6332&quot;}" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.6332&quot;}"> <img class="item-target" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F9fe64ed389ce4cedbeb9969bd24399f4.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_224%2Cw_224&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> <span class="title item-target"> <span> <span class="tit">Vitis AI</span> <span class="dec">专栏收录该内容</span> </span> </span> </a> 
+          <a class="item-target" href="https://blog.csdn.net/abcxy2161/category_11789491.html" target="_blank" title="Vitis AI" data-report-view="{&quot;spm&quot;:&quot;1001.2101.3001.6332&quot;}" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.6332&quot;}"> <img class="item-target" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F9fe64ed389ce4cedbeb9969bd24399f4.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_224%2Cw_224&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> <span class="title item-target"> <span> <span class="tit">Vitis AI</span> <span class="dec">专栏收录该内容</span> </span> </span> </a> 
          </div> 
          <div class="item-m"> 
           <span>7 篇文章</span> 
@@ -89,7 +367,7 @@
          </div> 
          <div class="item-r"> 
           <a class="item-target article-column-subscribe" style="display:inline-block" data-type="true" data-id="11789491"> 会员已订阅 </a> 
-          <a style="display:none" class="item-target column-studyvip-free studyvip-unsubscribe column-studyvip-ajax" data-type="false" data-id="11789491"> <img class="item-target column-studyvip-icon" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fcomponents%2Fimg%2FstudyVipIcon.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">会员免费订 </a> 
+          <a style="display:none" class="item-target column-studyvip-free studyvip-unsubscribe column-studyvip-ajax" data-type="false" data-id="11789491"> <img class="item-target column-studyvip-icon" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fcomponents%2Fimg%2FstudyVipIcon.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload>会员免费订 </a> 
           <a class="item-target column-studyvip-discount column-studyvip-pass" data-report-view="{&quot;spm&quot;:&quot;1001.2015.3001.8590&quot;}" data-report-click="{&quot;spm&quot;:&quot;1001.2015.3001.8590&quot;}">8折续费 </a> 
          </div> 
         </div> 
@@ -98,12 +376,12 @@
       <div class="learning_the_member_box"> 
        <a href="https://www.csdn.net/vip?utm_source=bkzl_cjhy_ckqy" target="_blank"> 
         <div class="left">
-         <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FiconVIpCrown.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt="">
+         <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FiconVIpCrown.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt="">
          <span>您已是超级会员，正在免费阅读会员专享内容</span>
         </div> 
         <div class="right">
          <span>查看更多超级会员权益</span>
-         <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fcomponents%2Fimg%2FvipIconArrowLeftWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt="">
+         <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fcomponents%2Fimg%2FvipIconArrowLeftWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt="">
         </div> </a> 
       </div> 
       <article class="baidu_pl"> 
@@ -143,7 +421,7 @@ print(test_images.shape)</code></pre>
          <pre><code class="language-python">def test_image_save(images, num=32):
     for i in range(num):
         img = Image.fromarray(images[i])
-        img.save('images/{}.jpg'.format(i), quality=100)
+        img.save('images/&#123;&#125;.jpg'.format(i), quality=100)
 test_image_save(test_images, num=32)</code></pre> 
          <p>构建模型并打印summary</p> 
          <pre><code class="language-python">train_images = train_images.reshape((60000, 28,28,1))
@@ -283,7 +561,7 @@ quantized_model.evaluate(test_images, test_labels, batch_size=500)
 quantizer.dump_model(
     quantized_model, dataset=train_images[0:1], dump_float=True)</code></pre> 
          <p>运行该脚本</p> 
-         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F97678deab38c4ce9b2fe4bf852ba2c9e.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733"></p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F97678deab38c4ce9b2fe4bf852ba2c9e.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload></p> 
          <p>在目录下生成了quantized.h5量化模型文件，可以看到量化后的模型在测试集上评估精度为0.8797</p> 
          <h2 id="Compile-the-model">Compile the model</h2> 
          <p>编译模型需要准备以下文件</p> 
@@ -294,7 +572,7 @@ quantizer.dump_model(
          <p>将arch.json拷贝到本目录下，运行以下命令进行编译</p> 
          <pre><code class="language-python">vai_c_tensorflow2 -m quantized.h5 -a arch.json -o ./ -n tf2_cnn_fmnist
 </code></pre> 
-         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F33369b5ebd0c41ed86332cecf1cb7500.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733"></p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F33369b5ebd0c41ed86332cecf1cb7500.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload></p> 
          <p>&nbsp;在目录下生成了tf2_cnn_fmnist.xmodel</p> 
          <h1 id="Inference">Inference</h1> 
          <p>首先在设备上需要安装VART相关工具，安装脚本在VitisAI仓库的setup/mpsoc/VART中，将该目录下的target_vart_setup.sh拷贝到设备上运行</p> 
@@ -319,7 +597,7 @@ def get_graph_from_model(path):
     ]
 
 def image_preprocess(path, input_scale):
-    print('input_scale:{}'.format(input_scale))
+    print('input_scale:&#123;&#125;'.format(input_scale))
     image = cv2.imread(path, 0)
     image = image / 2
     image = image.astype(np.int8)
@@ -328,14 +606,14 @@ def image_preprocess(path, input_scale):
 def model_run(runner, img):
     input_tensors = runner.get_input_tensors()
     output_tensors = runner.get_output_tensors()
-    print('input tensor type:{}'.format(input_tensors))
+    print('input tensor type:&#123;&#125;'.format(input_tensors))
     input_ndim = tuple(input_tensors[0].dims)
-    print('input_ndim:{}'.format(input_ndim))
+    print('input_ndim:&#123;&#125;'.format(input_ndim))
     output_ndim = tuple(output_tensors[0].dims)
-    print('output_ndim:{}'.format(output_ndim))
+    print('output_ndim:&#123;&#125;'.format(output_ndim))
     input_data = [np.empty(input_ndim, dtype=np.int8, order="C")]
     output_data = [np.empty(output_ndim, dtype=np.int8, order="C")]
-    print('image shape:{}'.format(img.shape))
+    print('image shape:&#123;&#125;'.format(img.shape))
     #input_data[0] = img.reshape(input_ndim[1:])
     job_id = runner.execute_async(img.reshape((1,28,28,1)), output_data)
     runner.wait(job_id)
@@ -345,7 +623,7 @@ def model_run(runner, img):
 def main(argv):
     image_path = argv[1]
     model_path = argv[2]
-    print('image path:{}\nmodel path:{}'.format(
+    print('image path:&#123;&#125;\nmodel path:&#123;&#125;'.format(
         image_path, model_path))
 
     graph = get_graph_from_model(model_path)
@@ -353,15 +631,15 @@ def main(argv):
     input_fixpos = dpu_runner.get_input_tensors()[0].get_attr("fix_point")
     input_scale = 2**input_fixpos
     image_data = image_preprocess(image_path, input_scale)
-    print('image shape:{}'.format(image_data.shape))
-    print('{}'.format(image_data.reshape((28,28,1))))
+    print('image shape:&#123;&#125;'.format(image_data.shape))
+    print('&#123;&#125;'.format(image_data.reshape((28,28,1))))
     time_start = time.time()
     pred = model_run(dpu_runner, image_data)
-    print('pred:{}'.format(pred))
+    print('pred:&#123;&#125;'.format(pred))
     time_end = time.time()
 
     timetotal = time_end - time_start
-    print('total time:{}'.format(timetotal))
+    print('total time:&#123;&#125;'.format(timetotal))
 
 if __name__ == "__main__":
     main(sys.argv)</code></pre> 
@@ -383,7 +661,7 @@ if __name__ == "__main__":
       <div class="left-toolbox"> 
        <div class="toolbox-left"> 
         <div class="profile-box">
-         <a class="profile-href" target="_blank" href="https://blog.csdn.net/abcxy2161"><img class="profile-img" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fprofile.csdnimg.cn%2F8%2FB%2FC%2F3_abcxy2161&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733"><span class="profile-name">Wei.Studio</span></a>
+         <a class="profile-href" target="_blank" href="https://blog.csdn.net/abcxy2161"><img class="profile-img" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fprofile.csdnimg.cn%2F8%2FB%2FC%2F3_abcxy2161&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload><span class="profile-name">Wei.Studio</span></a>
         </div> 
         <div class="profile-attend"> 
          <a class="tool-attend tool-bt-button tool-unbt-attend" href="javascript:;" data-report-view="{&quot;mod&quot;:&quot;1592215036_002&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4232&quot;,&quot;extend1&quot;:&quot;已关注&quot;}">已关注</a> 
@@ -409,40 +687,40 @@ if __name__ == "__main__":
        <ul class="newnps-list"> 
         <li class="newnps-item" data-type="非常没帮助"> 
          <div class="newnps-img-box"> 
-          <img class="newnps-img active" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel1.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
-          <img class="newnps-img default" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey1.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
+          <img class="newnps-img active" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel1.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
+          <img class="newnps-img default" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey1.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
          </div> 
          <div class="newnps-text">
           非常没帮助
          </div> </li> 
         <li class="newnps-item" data-type="没帮助"> 
          <div class="newnps-img-box"> 
-          <img class="newnps-img active" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
-          <img class="newnps-img default" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
+          <img class="newnps-img active" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
+          <img class="newnps-img default" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
          </div> 
          <div class="newnps-text">
           没帮助
          </div> </li> 
         <li class="newnps-item" data-type="一般"> 
          <div class="newnps-img-box"> 
-          <img class="newnps-img active" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel3.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
-          <img class="newnps-img default" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey3.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
+          <img class="newnps-img active" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel3.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
+          <img class="newnps-img default" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey3.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
          </div> 
          <div class="newnps-text">
           一般
          </div> </li> 
         <li class="newnps-item" data-type="有帮助"> 
          <div class="newnps-img-box"> 
-          <img class="newnps-img active" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel4.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
-          <img class="newnps-img default" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey4.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
+          <img class="newnps-img active" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel4.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
+          <img class="newnps-img default" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey4.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
          </div> 
          <div class="newnps-text">
           有帮助
          </div> </li> 
         <li class="newnps-item" data-type="非常有帮助"> 
          <div class="newnps-img-box"> 
-          <img class="newnps-img active" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel5.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
-          <img class="newnps-img default" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey5.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
+          <img class="newnps-img active" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel5.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
+          <img class="newnps-img default" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey5.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
          </div> 
          <div class="newnps-text">
           非常有帮助
@@ -479,19 +757,19 @@ if __name__ == "__main__":
         <div class="aside-content"> 
          <ul> 
           <li> <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/abcxy2161/category_11789491.html" data-report-click="{&quot;mod&quot;:&quot;popu_826&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4230&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161/category_11789491.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
-            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F9fe64ed389ce4cedbeb9969bd24399f4.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> Vitis AI </span> <span class="pay-tag">付费</span> </a> <span class="special-column-num">7篇</span> </li> 
+            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F9fe64ed389ce4cedbeb9969bd24399f4.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> Vitis AI </span> <span class="pay-tag">付费</span> </a> <span class="special-column-num">7篇</span> </li> 
           <li> <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/abcxy2161/category_11838604.html" data-report-click="{&quot;mod&quot;:&quot;popu_826&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4230&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161/category_11838604.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
-            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756925.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> CV </span> <span class="pay-tag">付费</span> </a> <span class="special-column-num">3篇</span> </li> 
+            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756925.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> CV </span> <span class="pay-tag">付费</span> </a> <span class="special-column-num">3篇</span> </li> 
           <li> <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/abcxy2161/category_11782185.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161/category_11782185.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
-            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F190a9b4caf1348f1be2b8e6f998da85b.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> FreeRTOS+Trace </span> </a> <span class="special-column-num">4篇</span> </li> 
+            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F190a9b4caf1348f1be2b8e6f998da85b.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> FreeRTOS+Trace </span> </a> <span class="special-column-num">4篇</span> </li> 
           <li> <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/abcxy2161/category_11789572.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161/category_11789572.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
-            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F9fcbbafae0514c23a740864f4bea15ee.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 论文精读 </span> </a> <span class="special-column-num">1篇</span> </li> 
+            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F9fcbbafae0514c23a740864f4bea15ee.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 论文精读 </span> </a> <span class="special-column-num">1篇</span> </li> 
           <li> <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/abcxy2161/category_11063950.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161/category_11063950.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
-            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F637a48294ad04114869bdb6ebfef094b.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 嵌入式 </span> </a> <span class="special-column-num">4篇</span> </li> 
+            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F637a48294ad04114869bdb6ebfef094b.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 嵌入式 </span> </a> <span class="special-column-num">4篇</span> </li> 
           <li> <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/abcxy2161/category_11064152.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161/category_11064152.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
-            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756919.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> Python </span> </a> <span class="special-column-num">3篇</span> </li> 
+            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756919.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> Python </span> </a> <span class="special-column-num">3篇</span> </li> 
           <li> <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/abcxy2161/category_7029127.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161/category_7029127.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
-            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756930.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 前端 </span> </a> <span class="special-column-num">2篇</span> </li> 
+            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756930.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 前端 </span> </a> <span class="special-column-num">2篇</span> </li> 
          </ul> 
         </div> 
        </div> 
@@ -525,27 +803,27 @@ if __name__ == "__main__":
    <div class="comment-side-content"> 
     <div class="comment-side-tit"> 
      <span class="comment-side-tit-count">评论</span> 
-     <img class="comment-side-tit-close" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcloseBt.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">
+     <img class="comment-side-tit-close" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcloseBt.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload>
     </div>  
     <div id="pcFlodCommentSideBox" class="pc-flodcomment-sidebox"> 
      <div class="comment-fold-tit">
-      <span id="lookUnFlodComment" class="back"><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcommentArrowLeftWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""></span>被折叠的&nbsp;
+      <span id="lookUnFlodComment" class="back"><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcommentArrowLeftWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""></span>被折叠的&nbsp;
       <span class="count"></span>&nbsp;条评论 
       <a href="https://blogdev.blog.csdn.net/article/details/122245662" class="tip" target="_blank">为什么被折叠?</a> 
-      <a href="https://bbs.csdn.net/forums/FreeZone" class="park" target="_blank"> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FiconPark.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733">到【灌水乐园】发言</a> 
+      <a href="https://bbs.csdn.net/forums/FreeZone" class="park" target="_blank"> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FiconPark.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload>到【灌水乐园】发言</a> 
      </div> 
      <div class="comment-fold-content"></div> 
      <div id="lookBadComment" class="look-bad-comment side-look-comment"> 
-      <a class="look-more-comment">查看更多评论<img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcommentArrowDownWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""></a> 
+      <a class="look-more-comment">查看更多评论<img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcommentArrowDownWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""></a> 
      </div> 
     </div> 
    </div> 
   </div> 
   <div id="rewardNew" class="reward-popupbox-new"> 
-   <p class="rewad-title">打赏作者<span class="reward-close"><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcloseBt.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733"></span></p> 
+   <p class="rewad-title">打赏作者<span class="reward-close"><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcloseBt.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload></span></p> 
    <dl class="profile-box"> 
     <dd> 
-     <a href="https://blog.csdn.net/abcxy2161" data-report-click="{&quot;mod&quot;:&quot;popu_379&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161&quot;,&quot;ab&quot;:&quot;new&quot;}"> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fprofile.csdnimg.cn%2F8%2FB%2FC%2F3_abcxy2161&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" class="avatar_pic"> </a> 
+     <a target="_blank" rel="noopener" href="https://blog.csdn.net/abcxy2161" data-report-click="{&quot;mod&quot;:&quot;popu_379&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161&quot;,&quot;ab&quot;:&quot;new&quot;}"> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fprofile.csdnimg.cn%2F8%2FB%2FC%2F3_abcxy2161&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload class="avatar_pic"> </a> 
     </dd> 
     <dt> 
      <p class="blog-name">Wei.Studio</p> 
@@ -570,14 +848,14 @@ if __name__ == "__main__":
    </div> 
    <div class="pay-box"> 
     <div class="pay-type-blance pay-type active" data-type="blance"> 
-     <img class="unchoose" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewUnChoose.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
-     <img class="choose" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewChoose.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
+     <img class="unchoose" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewUnChoose.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
+     <img class="choose" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewChoose.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
      <span class="pay-type-name">余额支付</span> 
      <span class="pay-type-num">(余额：-- )</span> 
     </div> 
     <div class="pay-type-money pay-type" data-type="money"> 
-     <img class="unchoose" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewUnChoose.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
-     <img class="choose" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewChoose.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
+     <img class="unchoose" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewUnChoose.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
+     <img class="choose" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewChoose.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
      <span class="pay-type-name">扫码支付</span> 
     </div> 
    </div> 
@@ -590,13 +868,13 @@ if __name__ == "__main__":
       </div> 
       <div class="code-img-box"> 
        <div class="renovate"> 
-        <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-time-out.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733"> 
+        <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-time-out.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload> 
         <span>获取中</span> 
        </div> 
       </div> 
       <div class="code-pay-box"> 
-       <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewWeiXin.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
-       <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewZhiFuBao.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
+       <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewWeiXin.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
+       <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewZhiFuBao.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
        <span>扫码支付</span> 
       </div> 
      </div> 
@@ -618,14 +896,14 @@ if __name__ == "__main__":
    <div class="content-code"> 
     <div id="payCode" data-id=""> 
      <div class="renovate"> 
-      <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-time-out.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733"> 
+      <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-time-out.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload> 
       <span>点击重新获取</span> 
      </div> 
     </div> 
     <div class="pay-style">
-     <span><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fweixin.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733"></span>
-     <span><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fzhifubao.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733"></span>
-     <span><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fjingdong.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733"></span>
+     <span><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fweixin.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload></span>
+     <span><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fzhifubao.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload></span>
+     <span><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fjingdong.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload></span>
      <span class="text">扫码支付</span>
     </div> 
    </div> 
@@ -643,7 +921,7 @@ if __name__ == "__main__":
     <span class="span">钱包余额</span> 
     <span class="balance" style="color:#FC5531;font-size:14px;">0</span> 
     <div class="pay-code-tile"> 
-     <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-help.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""> 
+     <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-help.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""> 
      <div class="pay-code-content"> 
       <div class="span"> 
        <p class="title">抵扣说明：</p> 
@@ -652,7 +930,7 @@ if __name__ == "__main__":
      </div> 
     </div> 
    </div> 
-   <a class="pay-balance-con" href="https://i.csdn.net/#/wallet/balance/recharge" target="_blank"><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Frecharge.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" alt=""><span>余额充值</span></a> 
+   <a class="pay-balance-con" href="https://i.csdn.net/#/wallet/balance/recharge" target="_blank"><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Frecharge.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F126558733" srcset="/img/loading.gif" lazyload alt=""><span>余额充值</span></a> 
   </div> 
   <div style="display:none;">  
   </div> 
@@ -661,4 +939,158 @@ if __name__ == "__main__":
   <link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.6.12/ckeditor/plugins/chart/chart.css">      
   <link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.6.12/ckeditor/plugins/codesnippet/lib/highlight/styles/atom-one-light.css">                  
  </body>
+</html>
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       ©2022 9600Bits 😀 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+
+
+</body>
 </html>
