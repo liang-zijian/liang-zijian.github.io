@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Vitis AI资源</title>
+    <link href="/2022/10/25/vitisAI%20_tutorial/"/>
+    <url>/2022/10/25/vitisAI%20_tutorial/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>FPGA</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>The Story of Art</title>
     <link href="/2022/10/20/art/"/>
     <url>/2022/10/20/art/</url>
@@ -122,7 +141,7 @@
     <link href="/2022/04/12/test/"/>
     <url>/2022/04/12/test/</url>
     
-    <content type="html"><![CDATA[<h1 id="hello">Hello</h1><p>I'm testing a index image!</p><p>testing video: <style>.bbplayer{width: 100%; max-width: 850px; margin: auto}</style><div class="bbplayer"><iframe class="bbplayer" id="mmedia-ZQIEFmgXMpryUuQH" src="https://player.bilibili.com/player.html?bvid=BV1Pt4y137ZS&page=1&high_quality=1&danmaku=true" allowfullscreen="allowfullscreen" scrolling="no" border="0" frameborder="0" framespacing="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts allow-popups"></iframe></div><script> document.getElementById("mmedia-ZQIEFmgXMpryUuQH").style.height=document.getElementById("mmedia-ZQIEFmgXMpryUuQH").scrollWidth*0.76+"px";    window.onresize = function(){      document.getElementById("mmedia-ZQIEFmgXMpryUuQH").style.height=document.getElementById("mmedia-ZQIEFmgXMpryUuQH").scrollWidth*0.76+"px";    }; </script></p><p>testing tags:</p><div class="note note-success">            <p>Hello I'm testing a tags</p>          </div><div class="note note-danger">            <p>Hello I'm testing a tags</p>          </div><div class="note note-warning">            <p>Hello I'm testing a tags</p>          </div>]]></content>
+    <content type="html"><![CDATA[<h1 id="hello">Hello</h1><p>I'm testing a index image!</p><p>testing video: <style>.bbplayer{width: 100%; max-width: 850px; margin: auto}</style><div class="bbplayer"><iframe class="bbplayer" id="mmedia-hkoBwwFlHGQcKzKd" src="https://player.bilibili.com/player.html?bvid=BV1Pt4y137ZS&page=1&high_quality=1&danmaku=true" allowfullscreen="allowfullscreen" scrolling="no" border="0" frameborder="0" framespacing="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts allow-popups"></iframe></div><script> document.getElementById("mmedia-hkoBwwFlHGQcKzKd").style.height=document.getElementById("mmedia-hkoBwwFlHGQcKzKd").scrollWidth*0.76+"px";    window.onresize = function(){      document.getElementById("mmedia-hkoBwwFlHGQcKzKd").style.height=document.getElementById("mmedia-hkoBwwFlHGQcKzKd").scrollWidth*0.76+"px";    }; </script></p><p>testing tags:</p><div class="note note-success">            <p>Hello I'm testing a tags</p>          </div><div class="note note-danger">            <p>Hello I'm testing a tags</p>          </div><div class="note note-warning">            <p>Hello I'm testing a tags</p>          </div>]]></content>
     
     
     

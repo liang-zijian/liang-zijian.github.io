@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="zh-CN">
+ <head> 
+  <meta charset="utf-8"> 
+  <link rel="canonical" href="https://blog.csdn.net/abcxy2161/article/details/124983405"> 
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+  <meta name="renderer" content="webkit"> 
+  <meta name="force-rendering" content="webkit"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+  <meta name="report" content="{&quot;pid&quot;: &quot;blog&quot;, &quot;spm&quot;:&quot;1001.2101&quot;}"> 
+  <meta name="referrer" content="always"> 
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="alternate" media="handheld" href="#"> 
+  <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848"> 
+  <meta name="applicable-device" content="pc"> 
+  <link href="https://g.csdnimg.cn/static/logo/favicon32.ico" rel="shortcut icon" type="image/x-icon"> 
+  <title>Vitis AI(03) Vivado Flow_Wei.Studio的博客-CSDN博客</title>  
+  <meta name="keywords" content="Vitis AI(03) Vivado Flow"> 
+  <meta name="csdn-baidu-search" content="{&quot;autorun&quot;:true,&quot;install&quot;:true,&quot;keyword&quot;:&quot;Vitis AI(03) Vivado Flow&quot;}"> 
+  <meta name="description" content="从本文开始，将正式介绍VitisAI的工作流程。第一个流程就是Vivado Flow，在Vivado开发环境中创建一个硬件平台，为后续的PetaLinux和Vitis提供基础。Vivado中的大部分的内容都是在Block Design中完成的，核心目标是创建一个Zynq UltraScale MPSoC的运行硬件环境，以及为DPU的正常运行提供硬件支持。这里需要注意，较老版本的VitisAI教程中，需要在Vivado中导入DPU的IP核，这种做法已经成为历史，本文介绍的流程中，在Vivado中是不需要导入D">  
+  <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/release/blogv2/dist/pc/css/detail_enter-5667fdc9ab.min.css">   
+  <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/release/blogv2/dist/pc/themesSkin/skin-yellow/skin-yellow-28d34ab5fa.min.css">     
+  <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css"> 
+  <style>.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%} .MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%} .MathJax .MJX-monospace {font-family: monospace} .MathJax .MJX-sans-serif {font-family: sans-serif} #MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none} .MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0} .MathJax:focus, body :focus .MathJax {display: inline-table} .MathJax.MathJax_FullWidth {text-align: center; display: table-cell!important; width: 10000em!important} .MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none} img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important} .MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none} .MathJax nobr {white-space: nowrap!important} .MathJax img {display: inline!important; float: none!important} .MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none} .MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden} .MathJax_Processed {display: none!important} .MathJax_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none} .MathJax .MathJax_EmBox {display: block!important; overflow: hidden; width: 1px; height: 60em; min-height: 0; max-height: none} .MathJax_LineBox {display: table!important} .MathJax_LineBox span {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0} .MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)} .MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent} #MathJax_Tooltip * {filter: none; opacity: 1; background: transparent} @font-face {font-family: MathJax_Main; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Regular.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Main-bold; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Bold.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Bold.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Main-italic; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Italic.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Italic.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Math-italic; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Math-Italic.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Math-Italic.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Caligraphic; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Regular.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Size1; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Size1-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Size1-Regular.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Size2; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Size2-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Size2-Regular.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Size3; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Size3-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Size3-Regular.otf?V=2.7.2') format('opentype')} @font-face {font-family: MathJax_Size4; src: url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Size4-Regular.woff?V=2.7.2') format('woff'), url('https://csdnimg.cn/release/blog_mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Size4-Regular.otf?V=2.7.2') format('opentype')} .MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}</style>  
+ </head> 
+ <body class="nodata " style="">    
+  <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/pc/css/blog_code-01256533b5.min.css"> 
+  <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/chart-3456820cac.css">  
+  <div class="main_father clearfix d-flex justify-content-center mainfather-concision" style="height:100%;"> 
+   <div class="container clearfix container-concision" id="mainBox">  
+    <main style="width:100%">  
+     <div class="blog-content-box"> 
+      <div class="article-header-box"> 
+       <div class="article-header"> 
+        <div class="article-title-box"> 
+         <h1 class="title-article" id="articleContentId">Vitis AI(03) Vivado Flow</h1> 
+        </div> 
+        <div class="article-info-box"> 
+         <div class="article-bar-top"> 
+          <img class="article-type-img" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Foriginal.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+          <div class="bar-content"> 
+           <a class="follow-nickName " href="https://blog.csdn.net/abcxy2161" target="_blank" rel="noopener">Wei.Studio</a> 
+           <img class="article-time-img article-heard-img" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewCurrentTime2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+           <span class="time">于&nbsp;2022-05-26 14:13:45&nbsp;发布</span> 
+           <img class="article-read-img article-heard-img" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FarticleReadEyes2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+           <span class="read-count">204</span> 
+           <a id="blog_detail_zk_collection" class="un-collection" data-report-click="{&quot;mod&quot;:&quot;popu_823&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4232&quot;,&quot;ab&quot;:&quot;new&quot;}"> <img class="article-collect-img article-heard-img un-collect-status isdefault" style="display:inline-block" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FtobarCollect2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> <img class="article-collect-img article-heard-img collect-status isactive" style="display:none" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FtobarCollectionActive2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> <span class="name">收藏</span> <span class="get-collection"> 2 </span> </a> 
+          </div> 
+         </div> 
+         <div class="blog-tags-box"> 
+          <div class="tags-box artic-tag-box"> 
+           <span class="label">分类专栏：</span> 
+           <a class="tag-link" href="https://blog.csdn.net/abcxy2161/category_11789491.html" target="_blank" rel="noopener">Vitis AI</a> 
+           <span class="label">文章标签：</span> 
+           <a data-report-click="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;fpga开发&quot;,&quot;ab&quot;:&quot;new&quot;}" class="tag-link" href="https://so.csdn.net/so/search/s.do?q=fpga%E5%BC%80%E5%8F%91&amp;t=blog&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=" target="_blank" rel="noopener">fpga开发</a> 
+          </div> 
+         </div> 
+         <div class="slide-content-box"> 
+          <div class="article-copyright"> 
+           <div class="creativecommons">
+             版权声明：本文为博主原创文章，遵循
+            <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。 
+           </div> 
+           <div class="article-source-link">
+             本文链接：
+            <a href="https://blog.csdn.net/abcxy2161/article/details/124983405" target="_blank">https://blog.csdn.net/abcxy2161/article/details/124983405</a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="operating"> 
+          <a class="href-article-edit slide-toggle">版权</a> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div id="blogHuaweiyunAdvert"></div> 
+      <div id="blogColumnPayAdvert"> 
+       <div class="column-group"> 
+        <div class="column-group-item column-group0 column-group-item-one"> 
+         <div class="item-l"> 
+          <a class="item-target" href="https://blog.csdn.net/abcxy2161/category_11789491.html" target="_blank" title="Vitis AI" data-report-view="{&quot;spm&quot;:&quot;1001.2101.3001.6332&quot;}" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.6332&quot;}"> <img class="item-target" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F9fe64ed389ce4cedbeb9969bd24399f4.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_224%2Cw_224&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> <span class="title item-target"> <span> <span class="tit">Vitis AI</span> <span class="dec">专栏收录该内容</span> </span> </span> </a> 
+         </div> 
+         <div class="item-m"> 
+          <span>5 篇文章</span> 
+          <span>4 订阅</span> 
+          <span class="old-add-new-box"> <span class="price">¥49.90</span> <span class="oldprice">¥99.00</span> </span> 
+         </div> 
+         <div class="item-r"> 
+          <a style="display:none" class="item-target column-studyvip-free studyvip-subscribe column-studyvip-ajax" data-type="true" data-id="11789491"> <img class="item-target column-studyvip-icon" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fcomponents%2Fimg%2FstudyVipIcon.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405">会员已订阅 </a> 
+          <a style="display:inline-block" class="item-target column-studyvip-free studyvip-unsubscribe column-studyvip-ajax" data-type="false" data-id="11789491"> <img class="item-target column-studyvip-icon" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fcomponents%2Fimg%2FstudyVipIcon.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405">会员免费订 </a> 
+          <a class="item-target column-studyvip-discount column-studyvip-pass" data-report-view="{&quot;spm&quot;:&quot;1001.2015.3001.8590&quot;}" data-report-click="{&quot;spm&quot;:&quot;1001.2015.3001.8590&quot;}">8折续费 </a> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="learning_the_member_box"> 
+       <a href="https://www.csdn.net/vip?utm_source=bkzl_cjhy_ckqy" target="_blank"> 
+        <div class="left">
+         <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FiconVIpCrown.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt="">
+         <span>您已是超级会员，正在免费阅读会员专享内容</span>
+        </div> 
+        <div class="right">
+         <span>查看更多超级会员权益</span>
+         <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fcomponents%2Fimg%2FvipIconArrowLeftWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt="">
+        </div> </a> 
+      </div> 
+      <article class="baidu_pl"> 
+       <div id="article_content" class="article_content clearfix"> 
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-bbac9290cd.css"> 
+        <div id="content_views" class="htmledit_views"> 
+         <p>从本文开始，将正式介绍VitisAI的工作流程。第一个流程就是Vivado Flow，在Vivado开发环境中创建一个硬件平台，为后续的PetaLinux和Vitis提供基础。Vivado中的大部分的内容都是在Block Design中完成的，核心目标是创建一个Zynq UltraScale MPSoC的运行硬件环境，以及为DPU的正常运行提供硬件支持。这里需要注意，较老版本的VitisAI教程中，需要在Vivado中导入DPU的IP核，这种做法已经成为历史，本文介绍的流程中，在Vivado中是不需要导入DPU IP核的，只是对DPU运行环境进行支持，例如中断、时钟等</p> 
+         <h1 id="创建Vivado工程">创建Vivado工程</h1> 
+         <p>打开vivado</p> 
+         <pre><code>source /opt/pkg/xilinx/Vivado/2021.1/settings64.sh
+vivado</code></pre> 
+         <p>vivado打开后，点击Create Project-&gt;Next</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F48a35a15fc3e49de862a7b5b188f7061.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;输入项目名称，这里我输入的是”dpu_hardware”，点击Next</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F2f05fd43d9ef44589a53e5c722644bcc.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;在Project Type页面中选中RTL Project，并选中Project is an extensible Vitis platform，点击Next</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F6950f5ff5f6e49e39f11c9ce3e9146ec.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;在Default Part页面选择Family为Zynq UltraScale+ MPSoCs，Package为sfvc784，Temperature为E，Speed为-1，并在下方的表格中选中xczu2cg-sfvc784-1-e，点击Next，再点击Finish。这里需要注意，读者的芯片类型选择需要和自己的板子匹配</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F16d2baeba59a412b975628b1bd5ad303.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <h2>&nbsp;Block Design IP核添加</h2> 
+         <p>在左侧PROJECT MANAGER→IP INTEGRATOR点击Create Block Design，在弹出框中直接点击Next创建一个Block Design</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F5f4dd60589c54e6b8458ffcfc897d55f.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>在Diagram界面中点击加号，在搜索框中输入zynq，选择Zynq UltraScale+MPSoC，将其添加到Block Design中</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F45fdbd564f034b8e8c4999fb88ca5d99.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;添加后如下图所示</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2Feaec2c23c67e47f4a4d1639a2495f93b.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <h2>&nbsp;添加Clock</h2> 
+         <p>添加Clocking Wizard IP核</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F47e14c66b91f4d95b68635a0074847ec.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;添加后如下图所示</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F68cf3e185bf44338b5dc09fbfae68a4f.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;双击Clocking Wizard进入配置页面，在Output Clocks中选中clk_out1、clk_out2、clk_out3，并将Output Freq分别设置为100、200、400</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2Fa0ff325523f54eb6b9e26b9d5774e1e9.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;在Reset Type中选择Active Low，并点击OK</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2Fbc2fa907350246cda083d1a63896dd45.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <h2>&nbsp;添加Processor System Reset</h2> 
+         <p>添加Processor System Reset</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F4a72e7b6fd244186b296b02cee136470.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;因为有3路时钟，因此要创建3个对应的Reset模块，可点击添加的Reset，Ctrl+C/Ctrl+V复制2个出来</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F2d22002628bb45f7bedf3fd6796cc660.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;将Clocking Wizard的3路输出分别与Reset0/1/2的slowest_sync_clk管脚相连，将Clocking Wizard的locked与3个Reset的dcm_locked都相连</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F2a04a7ac18cb454e95d7e2d58bb5f4fa.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;点击Run Connection Automation，在弹出框中将clk_in1选择为zynq的clk0，将3个reset都选择为zynq的resetn0，点击OK</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F793d9fac75df499a8b9512f0f0545133.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;完成后Block Design如下图</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F4c7a8e22cedc444e8c5f6ac8f6501eef.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;点击Platform Setup，选中Clock，将3个Clock都设置为Enable，ID号分别设置为0、1、2，并将clk_out2设置为default</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F529251bf670747bbb5c7f5caa42a7a36.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <h2>添加AXI Interrupt Controller</h2> 
+         <p>添加AXI Interrupt Controller IP核</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F33a16a4d6877406da34b8323b25d7186.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;双击AXI Interrupt Controller进入配置页面，将Interrupt Output Connection选择为Single，点击OK</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F841afc4560e84cc9bfefd75e5ad32f79.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>双击ZYNQ进入配置页面，在PS-PL Configuration→PS-PL Interfaces→Master Interface中，确保两个FPD未选中，LPD选中</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F0f519e10edee4ae8a0059ddb07cf0867.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;在PS-PL Configuration→General→Interrupts→PL to PS中，将IRQ0[0-7]选择为1，点击OK</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2Fbc86f03c6a3140a1bb5754eae4c2db80.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;点击自动连接，默认都选择auto，点击OK</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F51a656d64024448c97f2a65420606e40.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;整个Block Design如图</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F5a1337d6d3434bca8fa79526f657f8b6.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;将axi_intc_0的irq连接到ZYNQ的pl_ps_irq0上，再点击图标刷新画布</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2Ffd985f7fb05d456da4a7c0afb12cfc38.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;在Platform Setup中将中断使能</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2Fea26057afcdd49ef92a2938c0c50a508.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;选择AXI Port，按照下图对端口进行配置</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2Faef257cf6b7d40629c3e5f81874a0e1b.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2Fb6b6cdc9c42b44928e0278bca14d1cca.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <h1>&nbsp;Zynq SoC配置</h1> 
+         <p>双击Zynq UltraScale MPSoC，打开其配置界面</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F929bda41a4c1410e9aa70f09509197ff.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <h2>&nbsp;I/O配置</h2> 
+         <p>在I/O Configuration中，配置Bank0~Bank2电压为LVCMOS18，Bank3电压为LVCMOS33</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2Fc9d833b993764e839854fd429b10f45a.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;在下方展开Low Speed→Memory Interfaces→QSPI，勾选QSPI，设置模式为Single，Data Mode选择x4，勾选Feedback Clk</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F0274fb729bef4e719743a3a3ad85a7c8.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;展开SD，并勾选SD0，配置Slol Type为eMMC，Data Transfer Mode为8Bit，勾选Reset，选择MIO23</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F6e8cedb84ac34cbf8a2e2e1207bd9adf.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;勾选SD1，Slot Type选择SD 2.0，Data Transfer Mode选择4Bit，勾选CD，用于检测SD卡的插入</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F271fd43060aa4db6aa0c3acb3b53144e.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;勾选I2C 1，用于EEPROM</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F0647c28c08dd4d3984b64aa6fa36ed9f.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;勾选UART1</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2Fe58ea0f8593c4c3faff612c0761cb51c.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;勾选TTC 0~TTC3</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F25abca70f3d14ea0a135dc895e4d94b2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;配置PS端以太网，勾选GEM3，勾选MDIO3</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F5cb0dd7625924386b366efd2ec08bcff.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;勾选USB0，勾选USB3.0，选择GT Lane1，勾选USB Reset→USB 0</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F6cfadd5e559f45c294a0d12dcb3c6529.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;勾选PCIe</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F9876920760a74191bfb39aba19f35e93.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;点击左侧Switch To Advanced Mode，选择PCIe Configuration</p> 
+         <ul>
+          <li>Basic Settings→Device Port Type：RootPort</li>
+          <li>Devices IDs→Initial ID Values→Subsystem ID：0x7</li>
+          <li>Devices IDs→Class Code→Base Class：0x06</li>
+          <li>Devices IDs→Class Code→Sub Class：0x04</li>
+         </ul> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F926663d2fa634aab918d76225e28f876.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405">&nbsp;</p> 
+         <p>回到I/O Configuration，勾选Display Port，Lane Selection选择Dual Higher</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F6324da95249245d2a0d358a52b8bc30d.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <h2>时钟配置</h2> 
+         <p>在Clock Configuration界面，Input Clocks配置参考时钟，PCIe选择Ref Clk0，100MHz，Display Port选择Ref Clk2，27MHz，USB0选择Ref Clk1，26MHz</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2Fb46d2516316f43fe9d6bcb05ca91016c.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;在Output Clocks窗口，如果不是IOPLL，改为IOPLL，保持一致</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F92bedebe2d0a4e93976ba925746f6f5e.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;PL的时钟保持默认</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F928ffe39c2b5438bb4183bbf786afe5b.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;Full Power部分，其他保持默认，将DP_VIDEO改为VPLL，DP_AUDIO和DP_STC改为RPLL</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F04a78b669b4e4ac9ad25e81081cf41fd.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;最下面的Interconnect修改如下</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2Fbaa4e7e35e26466fa80960533ed40af6.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <h2>DDR配置</h2> 
+         <p>在DDR Configuration窗口中，Load DDR Presets选择“DDR4_MICRON_MT40A256M16GE_083E”</p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F14283343257542ad8f83c6787d60710d.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <h1>&nbsp;生成bit</h1> 
+         <p>BLOCK DESIGN→Sources→design_1，右键选择Create HDL Wrapper生成top文件</p> 
+         <p><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2Fa1bca166d4be4e88a92b193317aa8504.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p style="text-align:center;"><img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F95a7afca1fb84ece97b2ce952a368722.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405">&nbsp;</p> 
+         <p>&nbsp;点击Generate Bitstream图标生成bit流，等待生成完成后，点击File→Export→Export Platform，选Next、选Hardware。选Pre-synthesis+include bitstream</p> 
+         <p style="text-align:center;">&nbsp;<img alt="" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F6a038c9d8e9f49b28108af1ed2a95e73.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></p> 
+         <p>&nbsp;设置平台名称等信息，点击Next、Finsih，可看到在dpu_hardware路径下生成了design_1_wrapper.xsa文件</p> 
+        </div> 
+       </div> 
+       <div id="treeSkill"></div> 
+      </article>  
+     </div> 
+     <div class="more-toolbox-new" id="toolBarBox"> 
+      <div class="left-toolbox"> 
+       <div class="toolbox-left"> 
+        <div class="profile-box">
+         <a class="profile-href" target="_blank" href="https://blog.csdn.net/abcxy2161"><img class="profile-img" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fprofile.csdnimg.cn%2F8%2FB%2FC%2F3_abcxy2161&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"><span class="profile-name">Wei.Studio</span></a>
+        </div> 
+        <div class="profile-attend"> 
+         <a class="tool-attend tool-bt-button tool-bt-attend" href="javascript:;" data-report-view="{&quot;mod&quot;:&quot;1592215036_002&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4232&quot;,&quot;extend1&quot;:&quot;关注&quot;}">关注</a> 
+         <a class="tool-item-follow active-animation" style="display:none;">关注</a> 
+        </div> 
+       </div> 
+       <div class="toolbox-middle">  
+       </div> 
+       <div class="toolbox-right"> 
+        <div class="tool-directory"> 
+         <a class="bt-columnlist-show" data-id="11789491" data-free="false" data-subscribe="false" data-title="Vitis AI" data-img="https://img-blog.csdnimg.cn/9fe64ed389ce4cedbeb9969bd24399f4.png?x-oss-process=image/resize,m_fixed,h_224,w_224" data-url="https://blog.csdn.net/abcxy2161/category_11789491.html" data-sum="5" data-people="4" data-price="49.90" data-oldprice="99.00" data-join="true" data-studyvip="true" data-studysubscribe="false" data-report-view="{&quot;spm&quot;:&quot;1001.2101.3001.6334&quot;,&quot;extend1&quot;:&quot;专栏目录&quot;}" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.6334&quot;,&quot;extend1&quot;:&quot;专栏目录&quot;}">专栏目录</a> 
+        </div> 
+        <div class="tool-column"> 
+        </div> 
+       </div> 
+      </div> 
+     </div>        
+     <a id="commentBox" name="commentBox"></a>   
+     <div id="recommendNps" class="recommend-nps-box common-nps-box"> 
+      <h3 class="aside-title">“相关推荐”对你有帮助么？</h3> 
+      <div class="aside-content"> 
+       <ul class="newnps-list"> 
+        <li class="newnps-item" data-type="非常没帮助"> 
+         <div class="newnps-img-box"> 
+          <img class="newnps-img active" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel1.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+          <img class="newnps-img default" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey1.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+         </div> 
+         <div class="newnps-text">
+          非常没帮助
+         </div> </li> 
+        <li class="newnps-item" data-type="没帮助"> 
+         <div class="newnps-img-box"> 
+          <img class="newnps-img active" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+          <img class="newnps-img default" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey2.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+         </div> 
+         <div class="newnps-text">
+          没帮助
+         </div> </li> 
+        <li class="newnps-item" data-type="一般"> 
+         <div class="newnps-img-box"> 
+          <img class="newnps-img active" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel3.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+          <img class="newnps-img default" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey3.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+         </div> 
+         <div class="newnps-text">
+          一般
+         </div> </li> 
+        <li class="newnps-item" data-type="有帮助"> 
+         <div class="newnps-img-box"> 
+          <img class="newnps-img active" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel4.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+          <img class="newnps-img default" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey4.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+         </div> 
+         <div class="newnps-text">
+          有帮助
+         </div> </li> 
+        <li class="newnps-item" data-type="非常有帮助"> 
+         <div class="newnps-img-box"> 
+          <img class="newnps-img active" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeel5.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+          <img class="newnps-img default" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnpsFeelGrey5.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+         </div> 
+         <div class="newnps-text">
+          非常有帮助
+         </div> </li> 
+       </ul> 
+       <div class="newnps-form-box"> 
+        <div class="newnps-form"> 
+         <input type="text" placeholder="请输入建议或反馈后点击提交" class="newnps-input"> 
+         <span class="newnps-btn">提交</span> 
+        </div> 
+       </div> 
+      </div> 
+     </div>     
+    </main>     
+   </div> 
+   <div class="recommend-right align-items-stretch clearfix" id="rightAside" data-type="recommend"> 
+    <aside class="recommend-right_aside"> 
+     <div id="recommend-right"> 
+      <div class="flex-column aside-box groupfile" id="groupfile"> 
+       <div class="groupfile-div"> 
+        <h3 class="aside-title">目录</h3> 
+        <div class="align-items-stretch group_item"> 
+         <div class="pos-box"> 
+          <div class="scroll-box"> 
+           <div class="toc-box"></div> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="aside-box kind_person d-flex flex-column"> 
+       <h3 class="aside-title">分类专栏</h3> 
+       <div class="align-items-stretch kindof_item" id="kind_person_column"> 
+        <div class="aside-content"> 
+         <ul> 
+          <li> <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/abcxy2161/category_11789491.html" data-report-click="{&quot;mod&quot;:&quot;popu_826&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4230&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161/category_11789491.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F9fe64ed389ce4cedbeb9969bd24399f4.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> Vitis AI </span> <span class="pay-tag">付费</span> </a> <span class="special-column-num">5篇</span> </li> 
+          <li> <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/abcxy2161/category_11838604.html" data-report-click="{&quot;mod&quot;:&quot;popu_826&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4230&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161/category_11838604.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756925.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> CV </span> <span class="pay-tag">付费</span> </a> <span class="special-column-num">3篇</span> </li> 
+          <li> <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/abcxy2161/category_11782185.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161/category_11782185.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F190a9b4caf1348f1be2b8e6f998da85b.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> FreeRTOS+Trace </span> </a> <span class="special-column-num">4篇</span> </li> 
+          <li> <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/abcxy2161/category_11789572.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161/category_11789572.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F9fcbbafae0514c23a740864f4bea15ee.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 论文精读 </span> </a> <span class="special-column-num">1篇</span> </li> 
+          <li> <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/abcxy2161/category_11063950.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161/category_11063950.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F637a48294ad04114869bdb6ebfef094b.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 嵌入式 </span> </a> <span class="special-column-num">4篇</span> </li> 
+          <li> <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/abcxy2161/category_11064152.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161/category_11064152.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756919.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> Python </span> </a> <span class="special-column-num">3篇</span> </li> 
+          <li> <a class="clearfix special-column-name" target="_blank" href="https://blog.csdn.net/abcxy2161/category_7029127.html" data-report-click="{&quot;mod&quot;:&quot;popu_537&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4137&quot;,&quot;strategy&quot;:&quot;pc付费专栏左侧入口&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161/category_7029127.html&quot;,&quot;ab&quot;:&quot;new&quot;}"> 
+            <div class="special-column-bar "></div> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fimg-blog.csdnimg.cn%2F20201014180756930.png%3Fx-oss-process%3Dimage%2Fresize%2Cm_fixed%2Ch_64%2Cw_64&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt="" onerror="this.src='https://img-blog.csdnimg.cn/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64'"> <span class=""> 前端 </span> </a> <span class="special-column-num">2篇</span> </li> 
+         </ul> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </aside> 
+   </div> 
+   <div class="recommend-right1  align-items-stretch clearfix" id="rightAsideConcision" data-type="recommend"> 
+    <aside class="recommend-right_aside"> 
+     <div id="recommend-right-concision"> 
+      <div class="flex-column aside-box groupfile" id="groupfileConcision"> 
+       <div class="groupfile-div1"> 
+        <h3 class="aside-title">目录</h3> 
+        <div class="align-items-stretch group_item"> 
+         <div class="pos-box"> 
+          <div class="scroll-box"> 
+           <div class="toc-box"></div> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </aside> 
+   </div> 
+  </div> 
+  <div class="mask-dark"></div>  
+  <div class="skin-boxshadow"></div> 
+  <div class="directory-boxshadow"></div> 
+  <div class="comment-side-box-shadow comment-side-tit-close" id="commentSideBoxshadow"> 
+   <div class="comment-side-content"> 
+    <div class="comment-side-tit"> 
+     <div class="comment-side-tit-count">
+      评论&nbsp;
+      <span class="count">6</span>
+     </div> 
+     <img class="comment-side-tit-close" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcloseBt.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405">
+    </div>  
+    <div id="pcFlodCommentSideBox" class="pc-flodcomment-sidebox"> 
+     <div class="comment-fold-tit">
+      <span id="lookUnFlodComment" class="back"><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcommentArrowLeftWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""></span>被折叠的&nbsp;
+      <span class="count"></span>&nbsp;条评论 
+      <a href="https://blogdev.blog.csdn.net/article/details/122245662" class="tip" target="_blank">为什么被折叠?</a> 
+      <a href="https://bbs.csdn.net/forums/FreeZone" class="park" target="_blank"> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FiconPark.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405">到【灌水乐园】发言</a> 
+     </div> 
+     <div class="comment-fold-content"></div> 
+     <div id="lookBadComment" class="look-bad-comment side-look-comment"> 
+      <a class="look-more-comment">查看更多评论<img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcommentArrowDownWhite.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""></a> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <div id="rewardNew" class="reward-popupbox-new"> 
+   <p class="rewad-title">打赏作者<span class="reward-close"><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FcloseBt.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></span></p> 
+   <dl class="profile-box"> 
+    <dd> 
+     <a href="https://blog.csdn.net/abcxy2161" data-report-click="{&quot;mod&quot;:&quot;popu_379&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/abcxy2161&quot;,&quot;ab&quot;:&quot;new&quot;}"> <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fprofile.csdnimg.cn%2F8%2FB%2FC%2F3_abcxy2161&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" class="avatar_pic"> </a> 
+    </dd> 
+    <dt> 
+     <p class="blog-name">Wei.Studio</p> 
+     <p class="blog-discript">你的鼓励将是我创作的最大动力</p> 
+    </dt> 
+   </dl> 
+   <div class="reward-box-new"> 
+    <div class="reward-content">
+     <div class="reward-right"></div>
+    </div> 
+   </div> 
+   <div class="money-box"> 
+    <span class="choose-money choosed" data-id="2">¥2</span> 
+    <span class="choose-money " data-id="4">¥4</span> 
+    <span class="choose-money " data-id="6">¥6</span> 
+    <span class="choose-money " data-id="10">¥10</span> 
+    <span class="choose-money " data-id="20">¥20</span> 
+    <input id="customizeMoney" class="customize-money" name="" type="" value="" placeholder="自定义"> 
+    <div class="customize-tip">
+     输入1-500的整数
+    </div> 
+   </div> 
+   <div class="pay-box"> 
+    <div class="pay-type-blance pay-type active" data-type="blance"> 
+     <img class="unchoose" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewUnChoose.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+     <img class="choose" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewChoose.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+     <span class="pay-type-name">余额支付</span> 
+     <span class="pay-type-num">(余额：-- )</span> 
+    </div> 
+    <div class="pay-type-money pay-type" data-type="money"> 
+     <img class="unchoose" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewUnChoose.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+     <img class="choose" src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewChoose.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+     <span class="pay-type-name">扫码支付</span> 
+    </div> 
+   </div> 
+   <div class="sure-box"> 
+    <div class="sure-box-money"> 
+     <div class="code-box"> 
+      <div class="code-num-box"> 
+       <span class="code-name">扫码支付：</span>
+       <span class="code-num">¥2</span> 
+      </div> 
+      <div class="code-img-box"> 
+       <div class="renovate"> 
+        <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-time-out.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"> 
+        <span>获取中</span> 
+       </div> 
+      </div> 
+      <div class="code-pay-box"> 
+       <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewWeiXin.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+       <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2FnewZhiFuBao.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+       <span>扫码支付</span> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="sure-box-blance"> 
+     <p class="tip">您的余额不足，请更换扫码支付或<a target="_blank" data-report-click="{&quot;mod&quot;:&quot;1597646289_003&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4302&quot;}" href="https://i.csdn.net/#/wallet/balance/recharge?utm_source=RewardVip" class="go-invest">充值</a></p> 
+     <p class="is-have-money"><a class="reward-sure">打赏作者</a></p> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="pay-code"> 
+   <div class="pay-money">
+    实付
+    <span class="pay-money-span" data-nowprice="" data-oldprice="">元</span>
+   </div> 
+   <div class="content-blance">
+    <a class="blance-bt" href="javascript:;">使用余额支付</a>
+   </div> 
+   <div class="content-code"> 
+    <div id="payCode" data-id=""> 
+     <div class="renovate"> 
+      <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-time-out.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"> 
+      <span>点击重新获取</span> 
+     </div> 
+    </div> 
+    <div class="pay-style">
+     <span><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fweixin.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></span>
+     <span><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fzhifubao.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></span>
+     <span><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fjingdong.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405"></span>
+     <span class="text">扫码支付</span>
+    </div> 
+   </div> 
+   <div class="bt-close">
+    <svg t="1567152543821" class="icon" viewbox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10924" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12">
+     <defs>
+      <style type="text/css"></style>
+     </defs>
+     <path d="M512 438.378667L806.506667 143.893333a52.032 52.032 0 1 1 73.6 73.621334L585.621333 512l294.485334 294.485333a52.074667 52.074667 0 0 1-73.6 73.642667L512 585.621333 217.514667 880.128a52.053333 52.053333 0 1 1-73.621334-73.642667L438.378667 512 143.893333 217.514667a52.053333 52.053333 0 1 1 73.621334-73.621334L512 438.378667z" fill="" p-id="10925"></path>
+    </svg>
+   </div> 
+   <!-- <p style="margin-top: 8px;font-size: 14px;" class="text-center">支付成功即可阅读</p> --> 
+   <div class="pay-balance"> 
+    <input type="radio" class="pay-code-radio" data-type="details"> 
+    <span class="span">钱包余额</span> 
+    <span class="balance" style="color:#FC5531;font-size:14px;">0</span> 
+    <div class="pay-code-tile"> 
+     <img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Fpay-help.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""> 
+     <div class="pay-code-content"> 
+      <div class="span"> 
+       <p class="title">抵扣说明：</p> 
+       <p> 1.余额是钱包充值的虚拟货币，按照1:1的比例进行支付金额的抵扣。<br> 2.余额无法直接购买下载，可以购买VIP、C币套餐、付费专栏及课程。</p> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <a class="pay-balance-con" href="https://i.csdn.net/#/wallet/balance/recharge" target="_blank"><img src="https://pucsdn.com//main/csdn/img?url=https%3A%2F%2Fcsdnimg.cn%2Frelease%2Fblogv2%2Fdist%2Fpc%2Fimg%2Frecharge.png&amp;rfUrl=https%3A%2F%2Fblog.csdn.net%2Fabcxy2161%2Farticle%2Fdetails%2F124983405" alt=""><span>余额充值</span></a> 
+  </div> 
+  <div style="display:none;">  
+  </div> 
+  <div class="keyword-dec-box" id="keywordDecBox"></div>  
+  <!-- 富文本柱状图  --> 
+  <link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.6.12/ckeditor/plugins/chart/chart.css">      
+  <link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.6.12/ckeditor/plugins/codesnippet/lib/highlight/styles/atom-one-light.css">                  
+ </body>
+</html>
