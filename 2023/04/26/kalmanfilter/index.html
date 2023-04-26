@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://liang-zijian.github.io/img/kalmanfilter.png">
 <meta property="article:published_time" content="2023-04-26T13:38:45.000Z">
-<meta property="article:modified_time" content="2023-04-26T13:47:02.513Z">
+<meta property="article:modified_time" content="2023-04-26T13:54:08.532Z">
 <meta property="article:author" content="勤奋的草莓道士">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://liang-zijian.github.io/img/kalmanfilter.png">
@@ -289,9 +289,9 @@
 Point-LIO算法框架为on-ManiFold-KF，狠狠的补一下</p>
 </blockquote>
 <p>Matlab中国的B站教程基于问题出发的讲解非常NICE😀</p>
-<style>.bbplayer{width: 100%; max-width: 850px; margin: auto}</style><div class="bbplayer"><iframe class="bbplayer" id="mmedia-rceaOrTJEeHAyCwh" src="https://player.bilibili.com/player.html?bvid=BV1V5411V72J&page=1&high_quality=1&danmaku=true" allowfullscreen="allowfullscreen" scrolling="no" border="0" frameborder="0" framespacing="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts allow-popups"></iframe></div><script> document.getElementById("mmedia-rceaOrTJEeHAyCwh").style.height=document.getElementById("mmedia-rceaOrTJEeHAyCwh").scrollWidth*0.76+"px";
+<style>.bbplayer{width: 100%; max-width: 850px; margin: auto}</style><div class="bbplayer"><iframe class="bbplayer" id="mmedia-JsOHKzaKGllLyEJr" src="https://player.bilibili.com/player.html?bvid=BV1V5411V72J&page=1&high_quality=1&danmaku=true" allowfullscreen="allowfullscreen" scrolling="no" border="0" frameborder="0" framespacing="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts allow-popups"></iframe></div><script> document.getElementById("mmedia-JsOHKzaKGllLyEJr").style.height=document.getElementById("mmedia-JsOHKzaKGllLyEJr").scrollWidth*0.76+"px";
     window.onresize = function(){
-      document.getElementById("mmedia-rceaOrTJEeHAyCwh").style.height=document.getElementById("mmedia-rceaOrTJEeHAyCwh").scrollWidth*0.76+"px";
+      document.getElementById("mmedia-JsOHKzaKGllLyEJr").style.height=document.getElementById("mmedia-JsOHKzaKGllLyEJr").scrollWidth*0.76+"px";
     }; </script>
 <h2 id="为什么使用kf">为什么使用KF</h2>
 <ul>
@@ -530,6 +530,12 @@ alt="image-20230426213053676" />
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -786,6 +792,44 @@ alt="image-20230426213053676" />
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-svg-full.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
