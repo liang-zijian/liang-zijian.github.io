@@ -1,6 +1,6 @@
-baseURL: https://xyming108.github.io/ # 绑定的域名
+baseURL: https://liang-zijian.github.io/ # 绑定的域名
 languageCode: zh # en-us
-title: Sulv's Blog
+title: ZijianLiang's Blog
 theme: hugo-PaperMod  # 主题名字，和themes文件夹下的一致
 
 enableInlineShortcodes: true
@@ -32,31 +32,31 @@ defaultContentLanguageInSubdir: false
 menu:
   main:
     - identifier: search
-      name: 🔍 搜索
+      name: Search
       url: search
       weight: 1
     - identifier: home
-      name: 🏠 主页
+      name: Home
       url: /
       weight: 2
     - identifier: posts
-      name: 📚 文章
+      name: Posts
       url: posts
       weight: 3
     - identifier: tags
-      name: 🧩 标签
+      name: Tags
       url: tags
       weight: 15
     - identifier: archives
-      name: ⏱️ 时间轴
+      name: Archives
       url: archives/
       weight: 20
     - identifier: about
-      name: 🙋🏻‍♂️ 关于
+      name: About
       url: about
       weight: 50
     - identifier: links
-      name: 🤝 友链
+      name: Links
       url: links
       weight: 60
 
@@ -97,46 +97,45 @@ params:
 
   profileMode:
     enabled: true
-    title: (〃'▽'〃)
+    title: Nature's mysteries unveil, wisdom and wonder reign supreme.
     subtitle:
-    # subtitle: "🧨学而时习之，不亦说乎？有朋自远方来，不亦乐乎？<br/>👇联系方式"
-    imageUrl: "img/Q.gif"
+    imageUrl: "img/prof_pic.png"
     imageTitle:
     imageWidth: 150
     imageHeight: 150
     buttons:
-      - name: 🧱 建站
+      - name: 📖 Blog
         url: posts/blog
-      - name: 👨🏻‍💻 技术
+      - name: 👨🏻‍💻 Tech
         url: posts/tech
-      - name: 📕 阅读
+      - name: 📕 Reading
         url: posts/read
-      - name: 🏖 生活
+      - name: 🏖 Life
         url: posts/life
 
   socialIcons:
     - name: github
       url: "https://github.com/xyming108"
-    - name: twitter
-      url: "img/twitter.png"
-    - name: facebook
-      url: "https://www.facebook.com/profile.php?id=100027782410997"
-    - name: instagram
-      url: "img/instagram.png"
-    - name: QQ
-      url: "img/qq.png"
-    - name: WeChat
-      url: "img/wechat.png"
-    - name: bilibili
-      url: "https://space.bilibili.com/234461224"
+    # - name: twitter
+    #   url: "img/twitter.png"
+    # - name: facebook
+    #   url: "https://www.facebook.com/profile.php?id=100027782410997"
+    # - name: instagram
+    #   url: "img/instagram.png"
+    # - name: QQ
+    #   url: "img/qq.png"
+    # - name: WeChat
+    #   url: "img/wechat.png"
+    # - name: bilibili
+    #   url: "https://space.bilibili.com/234461224"
     - name: email
-      url: "mailto:1931559710@qq.com"
-    - name: RSS
-      url: "index.xml"
+      url: "mailto:liangzijian@sjtu.edu.cn"
+    # - name: RSS
+    #   url: "index.xml"
 
   label: # 左上角图标
-    text: "Sulv's Blog"
-    icon: "img/Q.gif"
+    text: "ZJLiang's Blog"
+    icon: "img/prof_pic.png"
     iconHeight: 35
 
   analytics:
@@ -144,11 +143,11 @@ params:
       SiteVerificationTag: ""
 
   assets:
-    favicon: "img/Q.gif"
-    favicon16x16: "img/Q.gif"
-    favicon32x32: "img/Q.gif"
-    apple_touch_icon: "img/Q.gif"
-    safari_pinned_tab: "img/Q.gif"
+    favicon: "img/prof_pic.png"
+    favicon16x16: "img/prof_pic.png"
+    favicon32x32: "img/prof_pic.png"
+    apple_touch_icon: "img/prof_pic.png"
+    safari_pinned_tab: "img/prof_pic.png"
     disableFingerprinting: true # 禁用指纹
 
   cover:
@@ -165,10 +164,10 @@ params:
     minMatchCharLength: 0
     keys: [ "title", "permalink", "summary" ]
 
-  StartYear: 2020 # 底部开始年份
-  FilingNo: 填写自己的备案号 # 底部备案号
-  PublicSecurityIconLink: 填自己的公安图标链接 # 填自己的公安图标链接,可用绝对路径，相对路径如 img/beian.png
-  PublicNetworkSecurity: 填自己的公网安备 # 底部公网安备号
+  StartYear: 2024 # 底部开始年份
+  FilingNo:  # 底部备案号
+  PublicSecurityIconLink:  # 填自己的公安图标链接,可用绝对路径，相对路径如 img/beian.png
+  PublicNetworkSecurity:  # 底部公网安备号
 
   Reward: true #打赏是否开启
   # 打赏微信图片地址，

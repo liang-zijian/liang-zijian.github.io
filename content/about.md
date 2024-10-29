@@ -1,13 +1,13 @@
 ---
-title: "🙋🏻‍♂️关于"
+title: "About"
 layout: about
-date: 2021-11-06T14:57:28+08:00
+date: 2024-10-29T5:57:28+08:00
 hidemeta: true
 description: ""
 weight:
 slug: ""
 draft: false # 是否为草稿
-comments: true
+comments: false
 reward: false
 showToc: false # 显示目录
 TocOpen: false # 自动展开目录
@@ -22,10 +22,4 @@ cover:
 
 
 
-<p style="font-size: 25px;">关于我</p>
-
-|           |                    |
-| --------- | ------------------ |
-| 英文名:   | Kevin Xu              |
-| 职业:     | 程序员             |
-| 运动:     | 跑步、乒乓球、爬山 |
+A worker in science palace

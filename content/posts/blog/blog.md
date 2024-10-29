@@ -1,5 +1,5 @@
 ---
-title: "Blog"
+title: "Posts"
 date: 2022-05-05T00:18:23+08:00
 lastmod: 2022-05-05T00:18:23+08:00
 author: ["Sulv"]
@@ -13,7 +13,7 @@ description: ""
 weight:
 slug: ""
 draft: false # 是否为草稿
-comments: true
+comments: false
 reward: true # 打赏
 mermaid: true #是否开启mermaid
 showToc: true # 显示目录
