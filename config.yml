@@ -1,5 +1,5 @@
 baseURL: https://liang-zijian.github.io/ # 绑定的域名
-languageCode: zh # en-us
+languageCode: en-us # en-us
 title: ZijianLiang's Blog
 theme: hugo-PaperMod  # 主题名字，和themes文件夹下的一致
 
@@ -95,6 +95,22 @@ params:
 
   comments: true
 
+  giscus:
+    repo: "liang-zijian/liang-zijian.github.io"
+    repo-id: "R_kgDONHay6w"
+    category: "Announcements"
+    category-id: "DIC_kwDONHay684Cjycs"
+    mapping: "pathname"
+    strict: "0"
+    reactions-enabled: "1"
+    emit-metadata: "0"
+    input-position: "bottom"
+    lightTheme: "light"
+    darkTheme: "dark"
+    lang: "zh-CN"
+    crossorigin: "anonymous"
+
+
   profileMode:
     enabled: true
     title: Nature's mysteries unveil, wisdom and wonder reign supreme.
@@ -104,18 +120,18 @@ params:
     imageWidth: 150
     imageHeight: 150
     buttons:
-      - name: 📖 Blog
+      - name: 🧠 Blog
         url: posts/blog
       - name: 👨🏻‍💻 Tech
         url: posts/tech
       - name: 📕 Reading
         url: posts/read
-      - name: 🏖 Life
-        url: posts/life
+      # - name: 🏖 Life
+      #   url: posts/life
 
   socialIcons:
     - name: github
-      url: "https://github.com/xyming108"
+      url: "https://github.com/liang-zijian"
     # - name: twitter
     #   url: "img/twitter.png"
     # - name: facebook
