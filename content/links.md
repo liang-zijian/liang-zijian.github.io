@@ -14,16 +14,18 @@ showbreadcrumbs: false
 
 <div class="friend">
 
-{{< friend name="Guanhao Wu" url="http://www.kitaaa.xyz/" logo="https://s2.loli.net/2024/10/29/6tvIrj4JXxblycS.jpg" word="A Mib" >}}
-
-</div>
-
-
-<div class="friend">
-
 {{< friend name="Ziyu Liu" url="https://liuziyu77.github.io/" logo="https://s2.loli.net/2024/10/29/DroCGi3enAW74Om.jpg" word="An advanced LLM" >}}
 
 </div>
+
+<div class="friend">
+
+{{< friend name="Guanhao Wu" url="http://www.kitaaa.xyz/" logo="https://s2.loli.net/2024/10/29/6tvIrj4JXxblycS.jpg" word="An Apple superfan sneaking around at Xiaomi." >}}
+
+</div>
+
+
+
 
 
 

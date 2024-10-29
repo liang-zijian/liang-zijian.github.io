@@ -38,10 +38,19 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
     font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 } */
 
-.post-content {
-    /*color: var(--secondary);*/
-    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+body {
+    font-family: "LXGW WenKai Screen", sans-serif !important;
 }
+ 
+/* code {
+    font-family: "LXGW WenKai Screen", sans-serif;
+} */
+/*code*/
+.post-content pre, code {
+font-family: 'Consolas', sans-serif !important;
+/* max-height: 40rem; */
+}
+
 
 .post-content h1 {
     font-size: 40px;
@@ -185,16 +194,5 @@ img:active {
     max-width: 100%;
 }
 
-body {
-    font-family: "LXGW WenKai Screen", sans-serif !important;
-}
- 
-code {
-    font-family: "LXGW WenKai Screen", sans-serif;
-}
-/*code*/
-.post-content pre, code {
-   font-family: 'Consolas', sans-serif;
-   max-height: 40rem;
-}
+
 
