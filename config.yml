@@ -120,11 +120,11 @@ params:
     imageWidth: 150
     imageHeight: 150
     buttons:
-      - name: 🧠 Blog
+      - name: 📰 Blog
         url: posts/blog
       - name: 👨🏻‍💻 Tech
         url: posts/tech
-      - name: 📕 Reading
+      - name: 🕮 Reading
         url: posts/read
       # - name: 🏖 Life
       #   url: posts/life
