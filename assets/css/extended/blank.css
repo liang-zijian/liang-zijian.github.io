@@ -32,11 +32,11 @@ Read https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#bundling-custom-cs
     max-width: calc(var(--nav-width) + var(--gap) * 10);
 }
 
-body {
+/* body {
     font-size: 18px;
     line-height: 1.6;
     font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-}
+} */
 
 .post-content {
     /*color: var(--secondary);*/
@@ -184,3 +184,17 @@ img:active {
 .buttons {
     max-width: 100%;
 }
+
+body {
+    font-family: "LXGW WenKai Screen", sans-serif !important;
+}
+ 
+code {
+    font-family: "LXGW WenKai Screen", sans-serif;
+}
+/*code*/
+.post-content pre, code {
+   font-family: 'Consolas', sans-serif;
+   max-height: 40rem;
+}
+
