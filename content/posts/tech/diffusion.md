@@ -24,7 +24,7 @@ disableShare: true # 底部不显示分享栏
 showbreadcrumbs: true # 顶部显示路径
 math: true
 cover:
-    image: "posts/tech/image/diffusion.gif" # 图片路径：posts/tech/123/123.png
+    image: "posts/tech/img/diffusion.gif" # 图片路径：posts/tech/123/123.png
     caption: "" # 图片底部描述
     alt: ""
     relative: false
