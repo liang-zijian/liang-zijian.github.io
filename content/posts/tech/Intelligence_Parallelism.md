@@ -32,21 +32,20 @@ cover:
 
 # Introduction
 
-并行训练的功能可以分成三个组件：
 
-1. 分布式数据并行训练（DDP）是一种广泛采用的单程序多数据训练范式。在 DDP 中，**模型会在每个进程上复制，每个模型副本将接收不同的输入数据样本**。DDP 负责梯度通信以保持模型副本同步，并将其与梯度计算重叠以加速训练。
-2. 基于 RPC 的分布式训练（RPC）支持无法适应数据并行训练的通用训练结构，例如分布式流水线并行、参数服务器范式以及 DDP 与其他训练范式的组合。它有助于管理远程对象的生命周期，并将自动微分引擎扩展到单个计算节点之外。
-3. 提供了在组内进程之间发送张量的功能，包括集体通信 API（如 All Reduce 和 All Gather）和点对点通信 API（如 send 和 receive）。尽管 DDP 和 RPC 已经满足了大多数分布式训练需求，PyTorch 的中间表达 C10d 仍然在需要更细粒度通信控制的场景中发挥作用。例如，分布式参数平均，在这种情况下，应用程序希望在反向传播之后计算所有模型参数的平均值，而不是使用 DDP 来通信梯度。这可以将通信与计算解耦，并允许对通信内容进行更细粒度的控制，但同时也放弃了 DDP 提供的性能优化。
-
+Parallel Training Functionality can be divided into three components:
+1. Distributed Data Parallel (DDP) is a widely adopted single-process multi-data training paradigm. **In DDP, the model is replicated on each process, with each model replica receiving different input data samples**. DDP relies on gradient communication to keep model replicas in sync and combines this with gradient computation to accelerate training.
+2. RPC-based Distributed Training (RPC) supports general training structures that cannot adapt to data parallel training, such as distributed pipeline parallelism, parameter server paradigm, and combinations of DDP with other training paradigms. It helps manage the lifecycle of remote objects and automatically extends fine-grained control beyond a single compute node.
+3. Provides functionality for tensor communication between processes within a group, including collective communication APIs (such as All Reduce and All Gather) and point-to-point communication APIs (such as send and receive). Although DDP and RPC have satisfied most distributed training requirements, PyTorch's intermediate representation C10d still plays a role in scenarios requiring finer-grained communication control. For example, in distributed parameter averaging, applications wish to compute the average of all model parameters after backward propagation, rather than using DDP for gradient communication. This decouples communication from computation and allows finer-grained control over communication content, though it sacrifices the performance optimizations provided by DDP.
 
 
 # Data Parallism (DP)
+By dividing the **dataset into multiple subsets** and processing these subsets in parallel on different compute nodes to improve computational efficiency and speed.
 
-通过将**数据集划分为多个子集**并在不同计算节点上并行处理这些子集，以提高计算效率和速度。
+Each compute **node receives a complete copy of the model**.
 
-每个计算节点都会接收到**完整的模型副本**。
 
-![数据并行](02DataParallel01.jpg)
+![DP](02DataParallel01.jpg)
 
 
 # Model Parallism (MP)
@@ -56,7 +55,7 @@ cover:
 # Hybrid Parallism
 
 
-# 参考资料
+# Reference
 1. https://ilyee.github.io/2024/03/06/distributed-training/
 2. https://chenzomi12.github.io/
 
@@ -76,4 +75,3 @@ cover:
         crossorigin="anonymous"
         async>
 </script>
-
