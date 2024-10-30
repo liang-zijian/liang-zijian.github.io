@@ -1,5 +1,5 @@
 ---
-title: "Intelligence_Parallelism"
+title: "Intelligence_Parallelism (ToBeContinued)"
 date: 2024-10-30T17:01:24+08:00
 lastmod: 2024-10-30T17:01:24+08:00
 author: ["Zijian Liang"]
@@ -46,8 +46,7 @@ cover:
 
 每个计算节点都会接收到**完整的模型副本**。
 
-![数据并行](img/02DataParallel01.png)
-
+![数据并行](02DataParallel01.jpg)
 
 
 # Model Parallism (MP)
@@ -56,6 +55,10 @@ cover:
 
 # Hybrid Parallism
 
+
+# 参考资料
+1. https://ilyee.github.io/2024/03/06/distributed-training/
+2. https://chenzomi12.github.io/
 
 
 
