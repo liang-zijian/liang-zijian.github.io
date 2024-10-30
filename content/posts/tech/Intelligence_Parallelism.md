@@ -13,7 +13,7 @@ description: ""
 weight:
 slug: ""
 draft: false # 是否为草稿
-comments: true # 本页面是否显示评论
+comments: false # 本页面是否显示评论
 reward: false # 打赏
 mermaid: true #是否开启mermaid
 showToc: true # 显示目录
@@ -61,5 +61,19 @@ cover:
 2. https://chenzomi12.github.io/
 
 
-
+<script src="https://giscus.app/client.js"
+        data-repo="liang-zijian/liang-zijian.github.io"
+        data-repo-id="R_kgDONHay6w"
+        data-category="Announcements"
+        data-category-id="DIC_kwDONHay684Cjycs"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 
